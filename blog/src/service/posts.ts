@@ -31,3 +31,13 @@ export async function getUnfeaturedPosts(): Promise<Post[]> {
   const posts = await getPosts();
   return posts.filter((post) => post.featured === false);
 }
+
+export async function getIndexOfPost(path: string): Promise<number> {
+  const posts = await getPosts();
+  return posts.findIndex((post) => post.path === path);
+}
+
+export async function getPostByIndex(index: number): Promise<Post> {
+  const posts = await getPosts();
+  return posts[index];
+}
