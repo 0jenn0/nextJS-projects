@@ -1,12 +1,9 @@
 "use client";
 
-import { Post } from "@/service/posts";
+import { Post, getPost } from "@/service/posts";
 import Image from "next/image";
-import { GrPrevious, GrNext } from "react-icons/gr";
-import { FcPrevious, FcNext } from "react-icons/fc";
-import { GrFormPrevious, GrFormNext } from "react-icons/gr";
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
-import { AiOutlineCalendar } from "react-icons/ai";
+import { useRouter } from "next/navigation";
 
 type Direction = "prev" | "next";
 
@@ -20,14 +17,15 @@ type Props = {
   nextPost: Post;
 };
 
-const PostButton = ({ post, direction }: Prop) => {
-  //   const style =
-  //     "absolute top-1/2 transform -translate-y-1/2 text-white z-50  font-extrabold text-4xl";
+export async function PostButton({ post, direction }: Prop) {
+  const router = useRouter();
   const style =
     "absolute inset-0 text-white z-50  font-extrabold text-4xl transform ease-in-out duration-200 hover:text-6xl";
-
   return (
-    <div className="transform ease-in-out duration-200 relative w-1/2 hover:w-3/5">
+    <div
+      className="transform ease-in-out duration-200 relative w-1/2 hover:w-3/5"
+      onClick={() => router.push(`/posts/${post.path}`)}
+    >
       <span className={style}>
         {direction === "prev" ? (
           <SlArrowLeft className="absolute top-1/2 -translate-y-1/2 left-5" />
@@ -58,11 +56,9 @@ const PostButton = ({ post, direction }: Prop) => {
       <div className="absolute z-0 inset-0 bg-black opacity-50"></div>
     </div>
   );
-};
+}
 
 export default function OtherPosts({ prevPost, nextPost }: Props) {
-  console.log("post : ", prevPost, nextPost);
-
   return (
     <section className="flex w-full cursor-pointer">
       <PostButton post={prevPost} direction="prev" />

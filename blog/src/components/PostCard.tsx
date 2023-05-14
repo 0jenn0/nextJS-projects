@@ -14,7 +14,7 @@ export default function PostCard({
   const router = useRouter();
   return (
     <div
-      className="text-center bg-white rounded-lg drop-shadow-md"
+      className="text-center bg-white rounded-lg drop-shadow-md cursor-pointer"
       onClick={() => router.push(`/posts/${path}`)}
     >
       <Image
