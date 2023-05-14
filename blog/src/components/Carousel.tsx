@@ -28,7 +28,7 @@ export default function PostCarousel({ children }: Props) {
   };
 
   return (
-    <Carousel responsive={responsive} infinite autoPlay itemClass="m-3">
+    <Carousel responsive={responsive} ssr infinite autoPlay itemClass="m-3">
       {children}
     </Carousel>
   );

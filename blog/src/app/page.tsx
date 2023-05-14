@@ -17,7 +17,7 @@ export default async function Home({ post }: Props) {
   const unfeaturedPosts = await getUnfeaturedPosts();
 
   return (
-    <body className="w-11/12 m-auto">
+    <div className="w-11/12 m-auto">
       <Profile />
       <section>
         <h3 className="font-semibold text-lg mb-3">Featured Posts</h3>
@@ -56,6 +56,6 @@ export default async function Home({ post }: Props) {
           )}
         </PostCarousel>
       </section>
-    </body>
+    </div>
   );
 }

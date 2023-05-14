@@ -1,3 +1,3 @@
-export default function PostsPage() {
-  return <div>posts page</div>;
+export default function page() {
+  return <div>dksl</div>;
 }
