@@ -8,11 +8,7 @@ import {
   Post,
 } from "@/service/posts";
 
-type Props = {
-  post: Post;
-};
-
-export default async function Home({ post }: Props) {
+export default async function Home() {
   const featuredPosts = await getFeaturedPosts();
   const unfeaturedPosts = await getUnfeaturedPosts();
 
@@ -22,38 +18,18 @@ export default async function Home({ post }: Props) {
       <section>
         <h3 className="font-semibold text-lg mb-3">Featured Posts</h3>
         <div className="grid grid-cols-3 gap-11 mb-10">
-          {featuredPosts.map(
-            ({ path, date, title, description, category }, index) => (
-              <PostCard
-                key={index}
-                path={path}
-                date={date}
-                title={title}
-                description={description}
-                category={category}
-                featured
-              />
-            )
-          )}
+          {featuredPosts.map((post, index) => (
+            <PostCard key={index} post={post} />
+          ))}
         </div>
       </section>
 
       <section>
         <h3 className="font-semibold text-lg mb-3">You may like</h3>
         <PostCarousel>
-          {unfeaturedPosts.map(
-            ({ path, date, title, description, category }, index) => (
-              <PostCard
-                key={index}
-                path={path}
-                date={date}
-                title={title}
-                description={description}
-                category={category}
-                featured
-              />
-            )
-          )}
+          {unfeaturedPosts.map((post, index) => (
+            <PostCard key={index} post={post} />
+          ))}
         </PostCarousel>
       </section>
     </div>

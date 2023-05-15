@@ -17,7 +17,7 @@ type Props = {
   nextPost: Post;
 };
 
-export async function PostButton({ post, direction }: Prop) {
+export function PostButton({ post, direction }: Prop) {
   const router = useRouter();
   const style =
     "absolute inset-0 text-white z-50  font-extrabold text-4xl transform ease-in-out duration-200 hover:text-6xl";

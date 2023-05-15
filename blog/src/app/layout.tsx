@@ -18,8 +18,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <header className="flex width-full justify-between p-2">
+      <body className="relative">
+        <header className="flex width-full justify-between p-6 backdrop-blur-xl fixed top-0 left-0 right-0 z-50">
           <Link href="/">
             <span className="text-xl font-semibold">Jenn's Blog</span>
           </Link>
@@ -35,8 +35,9 @@ export default function RootLayout({
             ))}
           </nav>
         </header>
-        {children}
-        <footer className="text-slate-300 bg-slate-900 text-sm text-center p-2">
+        <div className="mt-20">{children}</div>
+
+        <footer className="text-slate-300 bg-slate-900 text-sm text-center p-4 mt-7">
           <span>Don't forget to CODE your dream | Alright reserved</span>
         </footer>
       </body>
