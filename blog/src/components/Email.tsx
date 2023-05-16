@@ -2,6 +2,7 @@
 import { useState, FormEvent } from "react";
 import nodemailer from "nodemailer";
 import axios from "axios";
+import { log } from "console";
 
 type EmailContentt = {
   email: string;
@@ -52,14 +53,26 @@ export default function Email() {
       message: emailContent.message,
       subject: emailContent.subject,
     };
-    console.log("payload", payload);
+    const jsonPayload = JSON.stringify(payload, null, 3);
+    console.log("JSONpayload : ", jsonPayload);
 
     if (emailContent.email && emailContent.message && emailContent.subject) {
-     try {
-        const response = await fetch('/api/mail', 
-        {method: "POST",}
-        )
-     }
+      try {
+        await fetch("/api/mail", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: jsonPayload,
+        }).then((response) => {
+          console.log("response : ", response);
+          if (response.status == 200) {
+            console.log("Post 성공");
+          } else if (response.status == 400) {
+            console.log("post 실패");
+          }
+        });
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
