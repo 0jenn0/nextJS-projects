@@ -18,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="relative">
+      <body className="relative w-screen h-screen">
         <header className="flex width-full justify-between p-6 backdrop-blur-xl fixed top-0 left-0 right-0 z-50">
           <Link href="/">
             <span className="text-xl font-semibold">Jenn's Blog</span>
@@ -37,7 +37,7 @@ export default function RootLayout({
         </header>
         <div className="mt-20">{children}</div>
 
-        <footer className="text-slate-300 bg-slate-900 text-sm text-center p-4 mt-7">
+        <footer className="text-slate-300 bg-slate-900 text-sm text-center p-4 mt-7 bottom-0">
           <span>Don't forget to CODE your dream | Alright reserved</span>
         </footer>
       </body>
