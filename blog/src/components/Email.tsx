@@ -1,8 +1,5 @@
 "use client";
 import { useState, FormEvent } from "react";
-import nodemailer from "nodemailer";
-import axios from "axios";
-import { log } from "console";
 
 type EmailContentt = {
   email: string;
@@ -16,32 +13,6 @@ export default function Email() {
     subject: "",
     message: "",
   });
-
-  //   const transporter = nodemailer.createTransport({
-  //     host: "smtp.gmail.com",
-  //     port: 465,
-  //     secure: true,
-  //     auth: {
-  //       user: process.env.NEXT_PUBLIC_AUTH_EMAIL,
-  //       pass: process.env.NEXT_PUBLIC_AUTH_PASS,
-  //     },
-  //   });
-
-  //   const mailOptions = {
-  //     from: emailContent.email,
-  //     to: process.env.NEXT_PUBLIC_AUTH_EMAIL,
-  //     subject: "Test Email",
-  //     text: "This is a test email.",
-  //   };
-
-  //   const handleSubmit = (e) => {
-  //     e.preventDefault();
-  //     setEmailContent({
-  //       email: "",
-  //       subject: "",
-  //       message: "",
-  //     });
-  //   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     console.log("handle submit");
@@ -74,13 +45,20 @@ export default function Email() {
         console.log(error);
       }
     }
+    setEmailContent({ email: "", subject: "", message: "" });
   };
 
   return (
-    <div>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <label htmlFor="">Your Email</label>
+    <div className="bg-red-50 w-5/12 rounded-lg p-5 m-auto ">
+      <form
+        onSubmit={(e) => handleSubmit(e)}
+        className="flex flex-col text-left m-auto justify-center"
+      >
+        <label className="m-2" htmlFor="">
+          Your Email
+        </label>
         <input
+          className="px-4 py-2 rounded-full"
           value={emailContent.email}
           type="text"
           placeholder="user@mail.com"
@@ -89,8 +67,11 @@ export default function Email() {
           }
         />
 
-        <label htmlFor="">Subject</label>
+        <label className="m-2" htmlFor="">
+          Subject
+        </label>
         <input
+          className="px-4 py-2 rounded-full"
           type="text"
           placeholder="제목"
           value={emailContent.subject}
@@ -99,8 +80,11 @@ export default function Email() {
           }
         />
 
-        <label htmlFor="">Message</label>
+        <label className="m-2" htmlFor="">
+          Message
+        </label>
         <input
+          className="px-4 py-2 rounded-full"
           type="text"
           placeholder="메일 내용"
           value={emailContent.message}
@@ -108,7 +92,12 @@ export default function Email() {
             setEmailContent((prev) => ({ ...prev, message: e.target.value }))
           }
         />
-        <button type="submit">Send</button>
+        <button
+          className="bg-violet-300 rounded-xl w-min px-4 py-2 m-auto mt-5"
+          type="submit"
+        >
+          Send
+        </button>
       </form>
     </div>
   );

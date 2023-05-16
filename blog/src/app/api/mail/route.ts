@@ -13,7 +13,7 @@ const toEmail = process.env.NEXT_PUBLIC_AUTH_EMAIL;
 
 export async function POST(req: NextRequest) {
   const { email, subject, message }: EmailPayload = await req.json();
-  console.log("req.body:", email, subject, message);
+  // console.log("req.body:", email, subject, message);
 
   const emailParam = {
     toEmail: toEmail, // 수신할 이메일
