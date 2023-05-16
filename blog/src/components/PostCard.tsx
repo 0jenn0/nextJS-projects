@@ -12,7 +12,9 @@ export default function PostCard({ post }: Props) {
   const router = useRouter();
   return (
     <div
-      className="text-center bg-white rounded-lg drop-shadow cursor-pointer flex flex-col items-center"
+      className="text-center bg-white rounded-lg cursor-pointer flex flex-col items-center
+       transition ease-in-out duration-200 hover:-translate-y-2  hover:drop-shadow aspect-[3/1]
+      "
       onClick={() => router.push(`/posts/${post.path}`)}
     >
       <Image
