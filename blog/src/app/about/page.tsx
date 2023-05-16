@@ -4,7 +4,7 @@ export default function AboutPage() {
   return (
     <>
       <Profile />
-      <article className="text-center bg-pink-50 p-6 text-mediun flex justify-evenly h-64">
+      <article className="text-center bg-pink-50 p-6 text-mediun flex-col justify-evenly md:flex-initial">
         <div className="m-5">
           <h1 className="text-2xl font-semibold m-2">Who am ?</h1>
           <p>개발을 사랑하는 풀스택 개발자</p>

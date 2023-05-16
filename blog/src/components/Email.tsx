@@ -76,7 +76,7 @@ export default function Email() {
       ) : (
         ""
       )}
-      <div className="bg-red-50 w-5/12 rounded-lg p-5 m-auto ">
+      <div className="bg-red-50 w-3/4 rounded-lg p-5 m-auto md:w-5/12">
         <form
           onSubmit={(e) => handleSubmit(e)}
           className="flex flex-col text-left m-auto justify-center"

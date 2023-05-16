@@ -30,7 +30,7 @@ export default async function PostsPage({ params }: Props) {
   const nextPost = await getPostByIndex(index + 1);
 
   return (
-    <div className="w-2/3 m-auto bg-slate-100 rounded-xl mb-10 mt-20">
+    <div className="w-full m-auto bg-slate-100 rounded-xl mb-10 mt-20 md:w-2/3">
       <Image
         className="h-60 w-full object-cover rounded-t-xl"
         alt="Header"
