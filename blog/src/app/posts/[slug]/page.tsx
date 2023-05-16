@@ -2,15 +2,12 @@ import { getIndexOfPost, getPost, getPostByIndex } from "@/service/posts";
 import path from "path";
 import { promises as fs } from "fs";
 import React from "react";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
 import Image from "next/image";
 import PostNotFound from "./not-found";
 import { notFound } from "next/navigation";
 import { AiOutlineCalendar } from "react-icons/ai";
 import OtherPosts from "@/components/OtherPosts";
-// import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-// import { dark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import Markdown from "@/components/Markdown";
 
 type Props = {
   params: {
@@ -48,7 +45,8 @@ export default async function PostsPage({ params }: Props) {
       <h1 className="text-3xl pl-4 font-bold">{post.title}</h1>
       <div className="w-1/6 border-solid border-2 border-sky-300 ml-4 mt-2"></div>
       <article className="prose p-10 max-w-none">
-        <ReactMarkdown remarkPlugins={[remarkGfm]}>{markdown}</ReactMarkdown>
+        {/* <ReactMarkdown remarkPlugins={[remarkGfm]}>{markdown}</ReactMarkdown> */}
+        <Markdown markdown={markdown} />
       </article>
       <OtherPosts prevPost={prevPost} nextPost={nextPost} />
     </div>
