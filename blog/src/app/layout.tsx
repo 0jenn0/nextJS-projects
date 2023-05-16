@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="relative w-screen h-screen">
-        <header className="flex width-full justify-between p-6 backdrop-blur-xl fixed top-0 left-0 right-0 z-50">
+        <header className="flex width-full justify-between p-3 backdrop-blur-xl fixed top-0 left-0 right-0 z-50">
           <Link href="/">
             <span className="text-xl font-semibold">{`Jenn's Blog`}</span>
           </Link>

@@ -16,11 +16,12 @@ export default function Markdown({ markdown }: { markdown: string }) {
           return !inline && match ? (
             <SyntaxHighlighter
               {...props}
-              children={String(children).replace(/\n$/, "")}
               style={a11yDark}
               language={match[1]}
               PreTag="div"
-            />
+            >
+              {String(children).replace(/\n$/, "")}
+            </SyntaxHighlighter>
           ) : (
             <code {...props} className={className}>
               {children}
