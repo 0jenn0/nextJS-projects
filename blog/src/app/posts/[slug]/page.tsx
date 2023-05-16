@@ -48,7 +48,7 @@ export default async function PostsPage({ params }: Props) {
       <h1 className="text-3xl pl-4 font-bold">{post.title}</h1>
       <div className="w-1/6 border-solid border-2 border-sky-300 ml-4 mt-2"></div>
       <article className="prose p-10 max-w-none">
-        <ReactMarkdown children={markdown} remarkPlugins={[remarkGfm]} />
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>{markdown}</ReactMarkdown>
       </article>
       <OtherPosts prevPost={prevPost} nextPost={nextPost} />
     </div>

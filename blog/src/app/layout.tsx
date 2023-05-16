@@ -39,7 +39,7 @@ export default function RootLayout({
         <div className="mt-20">{children}</div>
 
         <footer className="text-slate-300 bg-slate-900 text-sm text-center p-4 mt-7 bottom-0">
-          <span>Don't forget to CODE your dream | Alright reserved</span>
+          <span>{`Don't forget to CODE your dream | Alright reserved`}</span>
         </footer>
       </body>
     </html>
