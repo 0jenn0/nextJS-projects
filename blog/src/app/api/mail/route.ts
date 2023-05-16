@@ -1,4 +1,3 @@
-import { Email } from "@/components/Email";
 //import type { NextApiRequest, NextApiResponse } from "next";
 import { NextRequest } from "next/server";
 import nodemailer from "nodemailer";

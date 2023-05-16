@@ -7,11 +7,12 @@ import { useRouter } from "next/navigation";
 type Props = {
   post: Post;
 };
+
 export default function PostCard({ post }: Props) {
   const router = useRouter();
   return (
     <div
-      className="text-center bg-white rounded-lg drop-shadow-md cursor-pointer"
+      className="text-center bg-white rounded-lg drop-shadow cursor-pointer flex flex-col items-center"
       onClick={() => router.push(`/posts/${post.path}`)}
     >
       <Image
@@ -21,10 +22,14 @@ export default function PostCard({ post }: Props) {
         width={800}
         height={800}
       />
-      <p className="flex justify-end">{post.date}</p>
-      <p>{post.title}</p>
-      <p>{post.description}</p>
-      <div>{post.category}</div>
+      <div className="flex w-full mr-2 justify-end items-end text-sm text-gray-500">
+        {post.date}
+      </div>
+      <p className="text-medium font-semibold">{post.title}</p>
+      <p className="text-sm text-gray-700">{post.description}</p>
+      <span className="bg-sky-200 rounded-full px-2 py-1 text-sm m-3">
+        {post.category}
+      </span>
     </div>
   );
 }

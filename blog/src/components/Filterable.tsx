@@ -24,10 +24,10 @@ export default function Filterable({ posts }: Props) {
     <div className="w-full m-auto flex">
       <section className="w-3/4 grid grid-cols-4 gap-11 mb-10 ml-20">
         {selected === "All posts"
-          ? posts.map((post) => <PostCard post={post} />)
+          ? posts.map((post, index) => <PostCard post={post} key={index} />)
           : posts
               .filter((post) => post.category === selected)
-              .map((post) => <PostCard post={post} />)}
+              .map((post, index) => <PostCard post={post} key={index} />)}
       </section>
       <CategoryMenu categories={categories} onClick={setSelected} />
     </div>
