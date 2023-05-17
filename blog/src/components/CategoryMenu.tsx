@@ -6,7 +6,7 @@ type Props = {
 };
 export default function CategoryMenu({ categories, onClick }: Props) {
   return (
-    <menu className="flex justify-start items-center mt-20 text-xs mb-10">
+    <menu className="flex justify-start items-center mt-20 text-xs mb-10 md:text-base">
       {/* <h1>Category</h1> */}
       {categories.map((category, index) => (
         <button

@@ -8,6 +8,18 @@ type Props = {
   post: Post;
 };
 
+const colorSet = ["bg-rose-100", "bg-sky-100", "bg-yellow-100", "bg-green-100"];
+
+const categories = ["my story", "frontend", "backend", "javascript"];
+
+const categoryMap = new Map();
+
+categories.forEach((category, index) => {
+  categoryMap.set(category, colorSet[index]);
+});
+
+console.log(categoryMap);
+
 export default function PostCard({ post }: Props) {
   const router = useRouter();
   return (
@@ -18,7 +30,7 @@ export default function PostCard({ post }: Props) {
       onClick={() => router.push(`/posts/${post.path}`)}
     >
       <Image
-        className="m-auto rounded-tr-lg rounded-tl-lg"
+        className="m-auto rounded-tr-lg rounded-tl-lg w-full"
         src={`/images/posts/${post.path}.png`}
         alt="Thumbnail"
         width={800}
@@ -29,7 +41,11 @@ export default function PostCard({ post }: Props) {
       </div>
       <p className="text-medium font-semibold">{post.title}</p>
       <p className="text-sm text-gray-700">{post.description}</p>
-      <span className="bg-sky-200 rounded-full px-2 py-1 text-sm m-3">
+      <span
+        className={`rounded-full px-2 py-1 text-sm m-3 ${categoryMap.get(
+          post.category
+        )}`}
+      >
         {post.category}
       </span>
     </div>
