@@ -45,7 +45,7 @@ export function PostButton({ post, direction }: Prop) {
       {post?.path ? (
         <Image
           className="w-100 h-60 z-20 object-cover"
-          src={`/images/posts/${post?.path}.png`}
+          src={`/images/posts/${post?.path}.jpeg`}
           alt="prev Thumbnail"
           width={2000}
           height={2000}

@@ -34,7 +34,7 @@ export default async function PostsPage({ params }: Props) {
       <Image
         className="h-60 w-full object-cover rounded-t-xl"
         alt="Header"
-        src={`/images/posts/${post!.path}.png`}
+        src={`/images/posts/${post!.path}.jpeg`}
         width={2000}
         height={1000}
       />

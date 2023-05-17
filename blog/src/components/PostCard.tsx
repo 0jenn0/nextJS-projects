@@ -30,12 +30,16 @@ export default function PostCard({ post }: Props) {
       onClick={() => router.push(`/posts/${post.path}`)}
     >
       <Image
-        className="m-auto rounded-tr-lg rounded-tl-lg w-full"
-        src={`/images/posts/${post.path}.png`}
+        className="m-auto rounded-lg w-full object-cover aspect-[1.5/1]"
+        src={`/images/posts/${post.path}.jpeg`}
         alt="Thumbnail"
         width={800}
         height={800}
       />
+      {/* <div
+        className={`w-500 h-500 bg-[url('/images/posts/${post.path}.jpeg')] bg-cover bg-no-repeat bg-center`}
+      /> */}
+
       <div className="flex w-full mr-2 justify-end items-end text-sm text-gray-500">
         {post.date}
       </div>
