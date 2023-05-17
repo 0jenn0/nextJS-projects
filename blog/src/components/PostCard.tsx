@@ -40,11 +40,15 @@ export default function PostCard({ post }: Props) {
         className={`w-500 h-500 bg-[url('/images/posts/${post.path}.jpeg')] bg-cover bg-no-repeat bg-center`}
       /> */}
 
-      <div className="flex w-full mr-2 justify-end items-end text-sm text-gray-500">
+      <div className="flex w-full mr-2 mb-1 justify-end items-end text-sm text-gray-400">
         {post.date}
       </div>
-      <p className="text-medium font-semibold">{post.title}</p>
-      <p className="text-sm text-gray-700">{post.description}</p>
+      <p className="text-medium font-semibold line-clamp-1 mb-1">
+        {post.title}
+      </p>
+      <p className="text-sm text-slate-600 line-clamp-2 h-10">
+        {post.description}
+      </p>
       <span
         className={`rounded-full px-2 py-1 text-sm m-3 ${categoryMap.get(
           post.category

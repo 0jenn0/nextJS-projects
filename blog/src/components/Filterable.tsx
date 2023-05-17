@@ -21,7 +21,7 @@ export default function Filterable({ posts }: Props) {
   const [selected, setSelected] = useState("All posts");
 
   return (
-    <div className="w-full m-auto flex-col mt-20  justify-center items-center md:flex">
+    <div className="w-full m-auto flex-col  justify-center items-center md:flex">
       <CategoryMenu categories={categories} onClick={setSelected} />
 
       <section className="m-auto w-11/12 grid   md:grid-cols-3  lg:grid-cols-5 grid-cols-1 gap-11 mb-10">
