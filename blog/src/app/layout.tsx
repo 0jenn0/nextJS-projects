@@ -5,7 +5,7 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "🐹 Jenn's Blog",
+  title: "Jenn's Blog 🤍",
   description: "젠 블로그 😝 created by Nex JS",
 };
 
