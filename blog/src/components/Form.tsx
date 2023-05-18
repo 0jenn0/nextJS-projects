@@ -1,11 +1,11 @@
 import { Dispatch, SetStateAction } from "react";
-import { EmailContentt } from "./Email";
+import { EmailContent } from "./Email";
 
 type Value = "email" | "subject" | "message";
 
 type Props = {
-  emailContent: EmailContentt;
-  setEmailContent: Dispatch<SetStateAction<EmailContentt>>;
+  emailContent: EmailContent;
+  setEmailContent: Dispatch<SetStateAction<EmailContent>>;
   value: Value;
 };
 
