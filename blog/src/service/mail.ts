@@ -1,5 +1,6 @@
 import { EmailContent, EmailStatus } from "@/components/Email";
 import { Dispatch, SetStateAction } from "react";
+import { object, string, number, date, InferType } from "yup";
 
 type Props = {
   emailContent: EmailContent;
@@ -17,28 +18,36 @@ export default async function mailer({
     message: emailContent.message,
     subject: emailContent.subject,
   };
-  const jsonPayload = JSON.stringify(payload, null, 3);
 
-  if (emailContent.email && emailContent.message && emailContent.subject) {
+  const mailSchema = object({
+    email: string().email().required(),
+    message: string().required(),
+    subject: string().required(),
+  });
+
+  const isValid = await mailSchema.isValid(payload);
+  if (isValid) {
     try {
+      const jsonMail = JSON.stringify(payload, null, 3);
       await fetch("/api/mail", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: jsonPayload,
+        body: jsonMail,
       }).then((response) => {
         if (response.status == 200) {
           setIsShow(true);
           setEmailStatus("success");
         } else if (response.status == 400) {
-          setIsShow(false);
+          setIsShow(true);
           setEmailStatus("fail");
         }
       });
     } catch (error) {
-      console.log(error);
+      console.log("에러!!!!!", error);
     }
   } else {
-    setIsShow(false);
+    setIsShow(true);
     setEmailStatus("fail");
+    console.log("안됨");
   }
 }

@@ -17,9 +17,7 @@ export default function Email() {
     subject: "",
     message: "",
   });
-
   const [emailStatus, setEmailStatus] = useState<EmailStatus>("default");
-
   const [isShow, setIsShow] = useState<boolean>(true);
 
   useEffect(() => {

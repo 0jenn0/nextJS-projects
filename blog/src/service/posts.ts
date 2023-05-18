@@ -1,9 +1,5 @@
 import path from "path";
 import { promises as fs } from "fs";
-// if (typeof window === "undefined") {
-//   const fs = require("fs");
-//   // 서버에서만 실행되는 코드
-// }
 
 export type Post = {
   title: string;
@@ -15,7 +11,6 @@ export type Post = {
 };
 
 export async function getPosts(): Promise<Post[]> {
-  // process.cwd = 지금 현재 경로
   const filePath = path.join(process.cwd(), "/data", "posts.json");
   const data = await fs.readFile(filePath, "utf-8");
   return JSON.parse(data);
