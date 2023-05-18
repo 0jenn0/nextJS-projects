@@ -9,7 +9,7 @@ export type EmailContent = {
   message: string;
 };
 
-export type EmailStatus = "success" | "fail" | "default";
+export type EmailStatus = "success" | "fail" | "sending";
 
 export default function Email() {
   const [emailContent, setEmailContent] = useState({
@@ -42,6 +42,10 @@ export default function Email() {
       ) : emailStatus === "fail" && isShow ? (
         <div className="bg-red-400 rounded-lg p-3 mb-10 w-1/3 m-auto">
           메일 보내기 실패했습니다.다시 시도해주세요.😲
+        </div>
+      ) : emailStatus === "sending" ? (
+        <div className="bg-sky-50 rounded-lg p-3 mb-10 w-1/3 m-auto">
+          메일을 보내는 중입니다 📨 ==3
         </div>
       ) : (
         ""

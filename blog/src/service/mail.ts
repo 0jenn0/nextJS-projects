@@ -29,6 +29,7 @@ export default async function mailer({
   if (isValid) {
     try {
       const jsonMail = JSON.stringify(payload, null, 3);
+      setEmailStatus("sending");
       await fetch("/api/mail", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -48,6 +49,5 @@ export default async function mailer({
   } else {
     setIsShow(true);
     setEmailStatus("fail");
-    console.log("안됨");
   }
 }
