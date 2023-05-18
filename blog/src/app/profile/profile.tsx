@@ -1,7 +1,6 @@
 import ContactButton from "@/components/ContactButton";
 import Image from "next/image";
 import profileImage from "/public/images/profile.jpg";
-import headerImage from "/public/images/header.jpeg";
 
 export default function Profile() {
   return (
