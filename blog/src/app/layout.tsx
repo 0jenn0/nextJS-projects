@@ -21,9 +21,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="relative w-screen h-screen">
+      <body className="flex flex-col w-full max-w-screen-2xl mx-auto">
         <Header />
-        <div>{children}</div>
+        <main className="grow pb-2">{children}</main>
         <Footer />
       </body>
     </html>

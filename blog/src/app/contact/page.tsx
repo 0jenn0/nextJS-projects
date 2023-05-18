@@ -3,8 +3,8 @@ import { BsGithub } from "react-icons/bs";
 
 export default async function ContactPage() {
   return (
-    <section className="text-center pt-20  box-border h-screen">
-      <h1 className="text-2xl m-2">Contact me</h1>
+    <section className="text-center pt-20  box-border">
+      <h1 className="text-2xl m-2 text-slate-700 mb-5">Contact me 📨</h1>
 
       <a
         href="https://github.com/0jenn0"
