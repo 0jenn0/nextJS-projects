@@ -10,6 +10,7 @@ export default function Profile() {
         src={profileImage}
         width={200}
         alt="Profile"
+        priority
       />
       <div>
         <div className="backdrop-blur-xl p-4 rounded-2xl">
