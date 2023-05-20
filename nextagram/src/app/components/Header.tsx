@@ -5,6 +5,7 @@ import {
 } from "react-icons/ai";
 import GoogleButton from "./GoogleButton";
 import User from "./User";
+import { createClient } from "next-sanity";
 
 export default function Header() {
   return (

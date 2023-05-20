@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 export default function GoogleButton() {
-  const [isLogin, setIsLogin] = useState<boolean>();
+  //   const [isLogin, setIsLogin] = useState<boolean>();
 
   return <button onClick={() => signIn("google")}>Sign In</button>;
   //   return <button onClick={() => signOut()}>sign out</button>;
