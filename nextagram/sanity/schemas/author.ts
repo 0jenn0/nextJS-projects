@@ -1,5 +1,9 @@
 import { defineField, defineType } from "sanity";
 
+// https://github.com/codewithkristian/sanity-blog-schema/tree/master/schemas
+// author : avatar,username,bio,folowers,following,posts,saved,liked
+// post : img,liked(+number),saved,댓글(author(avatar,username)),author(avatar,username),timeago
+
 export default defineType({
   name: "author",
   title: "Author",
@@ -20,26 +24,31 @@ export default defineType({
       },
     }),
     defineField({
-      name: "image",
-      title: "Image",
-      type: "image",
-      options: {
-        hotspot: true,
-      },
+      name: "imageUrl",
+      title: "Image Url",
+      type: "string",
+      // options: {
+      //   hotspot: true,
+      // },
     }),
     defineField({
       name: "bio",
       title: "Bio",
-      type: "array",
-      of: [
-        {
-          title: "Block",
-          type: "block",
-          styles: [{ title: "Normal", value: "normal" }],
-          lists: [],
-        },
-      ],
+      type: "string",
+      // of: [
+      //   {
+      //     title: "Block",
+      //     type: "block",
+      //     styles: [{ title: "Normal", value: "normal" }],
+      //     lists: [],
+      //   },
+      // ],
     }),
+    // defineField({
+    //   name: 'following',
+    //   title: "Following",
+    //   type: "reference",
+    // })
   ],
   preview: {
     select: {

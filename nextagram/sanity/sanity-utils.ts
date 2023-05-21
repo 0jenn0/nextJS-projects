@@ -22,6 +22,26 @@ export async function getPosts(): Promise<Project[]> {
     }`
   );
 }
+import { Author } from "@/app/components/GoogleButton";
+
+export async function postAuthor({ name, imageUrl }: Author) {
+  const client = createClient({
+    projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+    dataset: "production",
+    useCdn: false,
+    apiVersion: "2023-05-20",
+    token: process.env.NEXT_PUBLIC_SANITY_TOKEN,
+  });
+
+  const data = {
+    _type: "author",
+    name: name,
+    imageUrl: imageUrl,
+  };
+
+  const result = client.create(data);
+  return result;
+}
 
 export async function postPosts() {
   const client = createClient({
@@ -81,6 +101,7 @@ export async function postPosts() {
   //   };
   const data = {
     _type: "project",
+    _id: "lawijefl;wijea",
     name: "Project Name",
     slug: {
       _type: "slug",
@@ -95,6 +116,7 @@ export async function postPosts() {
     //   alt: "Image Alt Text",
     // },
     url: "https://example.com",
+
     content: [
       {
         _type: "block",
@@ -111,6 +133,6 @@ export async function postPosts() {
     ],
   };
 
-  const result = client.create(data);
+  const result = client.createIfNotExists(data);
   return result;
 }

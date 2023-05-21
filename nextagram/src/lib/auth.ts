@@ -15,6 +15,11 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
   },
-  // secret: "any-secret-word",
+  callbacks: {
+    async session({ session, token, user }) {
+      return session;
+    },
+  },
+  secret: "any-secret-word",
   adapter: SanityAdapter(client),
 };
