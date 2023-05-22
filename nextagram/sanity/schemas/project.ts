@@ -10,43 +10,37 @@ const project = {
       title: "Name",
       type: "string",
     },
-    {
-      name: "slug",
-      title: "Slug",
-      type: "slug",
-      options: { source: "name" },
-    },
+
     {
       name: "image",
       title: "Image",
       type: "image",
       options: { hotspot: true },
-      fields: [
-        {
-          name: "alt",
-          title: "Alt",
-          type: "string",
-        },
-      ],
+      // fields: [
+      //   {
+      //     name: "alt",
+      //     title: "Alt",
+      //     type: "string",
+      //   },
+      // ],
     },
-    {
-      name: "url",
-      title: "URL",
-      type: "url",
-    },
+
     {
       name: "content",
       title: "Content",
       type: "array",
       of: [{ type: "block" }],
     },
+
     {
       name: "user",
       title: "User",
-      type: "reference",
-      to: { type: "user" },
-      //   type: "array",
-      //   of: [{ type: "reference", to: { type: "user" } }],
+      type: "string",
+    },
+    {
+      name: "createdAt",
+      title: "Created At",
+      type: "datetime",
     },
   ],
 };

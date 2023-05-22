@@ -1,14 +1,6 @@
 "use client";
 
 import { signIn, signOut, useSession } from "next-auth/react";
-import { signUp } from "next-auth-sanity/client";
-import Link from "next/link";
-import { useState } from "react";
-import { postAuthor } from "../../../sanity/sanity-utils";
-import { useRouter } from "next/navigation";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
-import { Session } from "inspector";
 
 export type Author = {
   name: string;

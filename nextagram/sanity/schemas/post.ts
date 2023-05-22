@@ -1,4 +1,9 @@
-import { defineType } from "sanity";
+import { defineType, defineField } from "sanity";
+// import { useSession } from "next-auth/react";
+
+// const { data } = useSession();
+// const user = data!.user!;
+// const { email, image, name } = user;
 
 export default defineType({
   name: "post",
@@ -13,5 +18,24 @@ export default defineType({
       //   type: "array",
       //   of: [{ type: "reference", to: { type: "user" } }],
     },
+    defineField({
+      name: "createdAt",
+      title: "Created At",
+      type: "datetime",
+    }),
+    defineField({
+      name: "image",
+      title: "Image",
+      type: "image",
+    }),
+    // defineField({
+    //     name: 'user',
+    //     title: 'User',
+    //     type: 'reference',
+    // })
   ],
 });
+
+/**
+ *
+ */
