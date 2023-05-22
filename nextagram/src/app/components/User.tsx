@@ -1,6 +1,7 @@
 "use client";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import Link from "next/link";
 
 // async 쓰니까 data 무한으로 불러옴
 export default function User() {
@@ -8,7 +9,7 @@ export default function User() {
 
   if (data?.user) {
     return (
-      <>
+      <Link href={`/user/${data.user.email}}`}>
         <Image
           className="rounded-full"
           src={data.user.image ?? ""}
@@ -17,7 +18,7 @@ export default function User() {
           height={30}
         />
         {/* <p>{data?.user?.name}</p> */}
-      </>
+      </Link>
     );
   } else return <></>;
 }

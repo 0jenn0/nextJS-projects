@@ -8,21 +8,22 @@ import User from "./User";
 import Link from "next/link";
 
 export default function Header() {
+  const buttonStyle = "text-2xl";
   return (
-    <header className="flex justify-between px-3 py-1">
-      <h1>Nextagram</h1>
+    <header className="flex justify-between px-3 py-2 border-b border-gray-200">
+      <h1 className="text-lg font-semibold">Nextagram</h1>
 
       <nav className="flex gap-2 items-center">
         <Link href={"/"}>
-          <AiOutlineHome />
+          <AiOutlineHome className={buttonStyle} />
         </Link>
 
         <Link href={"/new"}>
-          <AiOutlinePlusSquare />
+          <AiOutlinePlusSquare className={buttonStyle} />
         </Link>
 
         <Link href={"/search"}>
-          <AiOutlineSearch />
+          <AiOutlineSearch className={buttonStyle} />
         </Link>
 
         <User />

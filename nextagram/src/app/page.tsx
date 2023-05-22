@@ -6,10 +6,12 @@ import SendButton from "./components/SendButton";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import SignButton from "./components/SignButton";
+import Hero from "./components/Hero";
 
 export default async function Home() {
-  const posts = await getPosts();
+  // const posts = await getPosts();
   // const send = await postPosts();
+
   const session = await getServerSession(authOptions);
   // return (
   //   <>
@@ -34,5 +36,9 @@ export default async function Home() {
     );
   }
 
-  return <h1>ㅇㅇ</h1>;
+  return (
+    <section className="w-full flex justify-center pt-5">
+      <Hero />
+    </section>
+  );
 }
