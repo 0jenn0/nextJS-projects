@@ -10,14 +10,14 @@ export default defineType({
   title: "Post",
   type: "document",
   fields: [
-    {
-      name: "user",
-      title: "User",
-      type: "reference",
-      to: { type: "user" },
-      //   type: "array",
-      //   of: [{ type: "reference", to: { type: "user" } }],
-    },
+    // {
+    //   name: "user",
+    //   title: "User",
+    //   type: "reference",
+    //   to: { type: "user" },
+    //   //   type: "array",
+    //   //   of: [{ type: "reference", to: { type: "user" } }],
+    // },
     defineField({
       name: "createdAt",
       title: "Created At",
