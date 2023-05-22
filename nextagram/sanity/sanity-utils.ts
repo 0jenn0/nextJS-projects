@@ -24,23 +24,35 @@ export async function isFollow(
 
   const followQuery1 = `*[_type == 'userCustom' && email==$mailOfUser1].following`;
   const params2 = { mailOfUser1: mailOfUser };
-  const following1 = await client.fetch(followQuery1, params2);
-  console.log("is Foloow following", following1);
-  const idToFollow: string = await get_IdByEmail(mailToFollow);
 
-  // const followingQuery = `*[_type == 'userCustom' && email==$mailOfUser].following`;
-  // const params = { mailOfUser: mailOfUser };
-  // const following = await client.fetch(followingQuery, params);
-
-  if (following1[1] == null) {
+  // const following1 = await client.fetch(followQuery1, params2);
+  // const idToFollow: string = await get_IdByEmail(mailToFollow);
+  const following1 = client.fetch(followQuery1, params2);
+  const idToFollow = get_IdByEmail(mailToFollow);
+  const [res1, res2] = await Promise.all([following1, idToFollow]);
+  if (res1[1] == null) {
     console.log("following은 null이다");
     console.log("isFollow함수", mailOfUser, mailToFollow);
     return false;
   }
   console.log("following은 null이 아니다 ㅎ");
 
-  const result = following1[1].some((obj: Obj) => obj._ref == idToFollow);
+  const result = res1[1].some((obj: Obj) => obj._ref == res2);
   return result;
+
+  // const followingQuery = `*[_type == 'userCustom' && email==$mailOfUser].following`;
+  // const params = { mailOfUser: mailOfUser };
+  // const following = await client.fetch(followingQuery, params);
+
+  // if (following1[1] == null) {
+  //   console.log("following은 null이다");
+  //   console.log("isFollow함수", mailOfUser, mailToFollow);
+  //   return false;
+  // }
+  // console.log("following은 null이 아니다 ㅎ");
+
+  // const result = following1[1].some((obj: Obj) => obj._ref == idToFollow);
+  // return result;
 }
 
 export async function getPosts(): Promise<Project[]> {
@@ -80,14 +92,14 @@ export async function followUser(mailOfUser: string, mailToFollow: string) {
   //const isFollow = following[0].some((obj: any) => obj._ref == userId);
   console.log("follll", following);
 
-  if (following[0] == null) {
+  if (following[1] == null || following[1].length == 0) {
     console.log("팔로우 하나도 없다가 시도");
     try {
       const email = mailToFollow;
       console.log("email", email);
 
       const userIdToFollow = await get_IdByEmail(email);
-      console.log("userIdToFollow", userIdToFollow); // null !!!
+      console.log("userIdToFollow", userIdToFollow[0]); // null !!!
 
       if (!userId) {
         console.error("No user found with the specified email");
@@ -95,12 +107,15 @@ export async function followUser(mailOfUser: string, mailToFollow: string) {
       }
 
       const result = await client
-        .patch(userId)
-        .setIfMissing({ following: [] })
+        .patch(userId[1])
+        // .setIfMissing({ following: [] })
         .insert("after", "following[-1]", [
-          { _type: "reference", _ref: userIdToFollow },
+          { _type: "reference", _ref: userIdToFollow[0] },
         ])
-        .commit();
+        .commit()
+        .then((updatedUser) => {
+          console.log("Follow : Updated user", updatedUser);
+        });
       console.log("following success");
       return result;
     } catch (error) {
@@ -138,27 +153,29 @@ export async function followUser(mailOfUser: string, mailToFollow: string) {
   }
 }
 
-// export async function followUser() {
-//   try {
-//     // 사용자의 _id를 가져오는 쿼리 실행
-//     const userQuery = `*[_type == "userCustom" && email == "jenn0.6n@gmail.com"][0]._id`;
-//     const userId = await client.fetch(userQuery);
+export async function unfollowUser(mailOfUser: string, mailToFollow: string) {
+  const userId = await get_IdByEmail(mailOfUser);
+  const idToUnfollow = await get_IdByEmail(mailToFollow);
 
-//     console.log("follow follow follow follow❌❌❌❌❌❌❌❌❌❌❌");
+  const query = `*[_type == 'userCustom' && _id == $id]`;
+  const params3 = { id: userId[1] };
 
-//     const mutation = client
-//       .patch(userId) // 사용자 문서의 ID를 전달
-//       .insert("after", "following[-1]") // 삽입할 위치를 지정
-//       .setIfMissing({ following: [] }) // `following` 배열이 없는 경우 초기화
-//       .insert("following", [{ _type: "reference", _ref: "person123" }]); // 레퍼런스 삽입
+  client
+    .fetch(query, params3)
+    .then((user) => {
+      const userId = user[0]._id;
+      const following = user[0].following || [];
 
-//     // 문서 업데이트 실행
-//     const result = await mutation.commit();
+      const updatedFollowing = following.filter(
+        (follow: Obj) => follow._ref !== idToUnfollow[0]
+      );
 
-//     console.log("Followed user successfully");
-//     return result;
-//   } catch (error) {
-//     console.error('Error following user:', error.message);
-//     return null;
-//   }
-// }
+      return client.patch(userId).set({ following: updatedFollowing }).commit();
+    })
+    .then((updatedUser) => {
+      console.log("Updated user", updatedUser);
+    })
+    .catch((err) => {
+      console.error("Error:", err);
+    });
+}

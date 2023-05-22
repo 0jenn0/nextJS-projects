@@ -16,7 +16,6 @@ type Props = {
 export default async function UserPage({ params }: Props) {
   return (
     <>
-      {/* @ts-expect-error Server Component */}
       <UserHeader email={params.slug} />
     </>
   );
