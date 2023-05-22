@@ -101,8 +101,8 @@ export async function postPosts() {
   //   };
   const data = {
     _type: "project",
-    _id: "lawijefl;wijea",
-    name: "Project Name",
+    _id: "lawijeflfffffwijfffea",
+    name: "user please send",
     slug: {
       _type: "slug",
       current: "project-name", // slug 값을 설정합니다.

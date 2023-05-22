@@ -5,7 +5,6 @@ import Image from "next/image";
 // async 쓰니까 data 무한으로 불러옴
 export default function User() {
   const { data, status } = useSession();
-  console.log("왜이럼", data);
 
   if (data?.user) {
     return (
@@ -17,7 +16,7 @@ export default function User() {
           width={30}
           height={30}
         />
-        <p>{data?.user?.name}</p>
+        {/* <p>{data?.user?.name}</p> */}
       </>
     );
   } else return <></>;

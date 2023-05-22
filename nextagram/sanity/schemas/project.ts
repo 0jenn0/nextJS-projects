@@ -40,6 +40,14 @@ const project = {
       type: "array",
       of: [{ type: "block" }],
     },
+    {
+      name: "user",
+      title: "User",
+      type: "reference",
+      to: { type: "user" },
+      //   type: "array",
+      //   of: [{ type: "reference", to: { type: "user" } }],
+    },
   ],
 };
 

@@ -17,12 +17,12 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <NextAuthProvider>
+      <NextAuthProvider>
+        <body className="flex flex-col w-full">
           <Header />
-          {children}
-        </NextAuthProvider>
-      </body>
+          <main className="grow">{children}</main>
+        </body>
+      </NextAuthProvider>
     </html>
   );
 }

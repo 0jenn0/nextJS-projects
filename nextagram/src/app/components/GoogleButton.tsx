@@ -6,6 +6,9 @@ import Link from "next/link";
 import { useState } from "react";
 import { postAuthor } from "../../../sanity/sanity-utils";
 import { useRouter } from "next/navigation";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { Session } from "inspector";
 
 export type Author = {
   name: string;
@@ -13,20 +16,13 @@ export type Author = {
 };
 export default function GoogleButton() {
   const { data, status } = useSession();
-
   const handleSignUp = () => {
     signIn("google");
   };
 
-  if (status === "authenticated" && data.user) {
-    const author = { name: data.user.name!, imageUrl: data.user.image! };
-    postAuthor(author);
-  }
-
-  return (
-    <>
-      <button onClick={() => handleSignUp()}>Sign Up</button>;
-      <button onClick={() => signOut()}>sign out</button>
-    </>
+  return !data ? (
+    <button onClick={() => handleSignUp()}>Sign Up</button>
+  ) : (
+    <button onClick={() => signOut()}>sign out</button>
   );
 }
