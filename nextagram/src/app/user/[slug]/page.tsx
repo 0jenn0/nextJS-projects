@@ -6,6 +6,9 @@ import groq from "groq";
 import FollowButton from "@/app/components/FollowButton";
 import UserHeader from "@/app/components/UserHeader";
 import { isFollow } from "../../../../sanity/sanity-utils";
+import PostCard from "@/app/components/Post";
+import { Post } from "../../../../types/Post";
+import GridPosts from "@/app/components/GridPosts";
 
 type Props = {
   params: {
@@ -17,6 +20,7 @@ export default async function UserPage({ params }: Props) {
   return (
     <>
       <UserHeader email={params.slug} />
+      <GridPosts email={params.slug} />
     </>
   );
 }

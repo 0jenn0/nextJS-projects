@@ -1,7 +1,7 @@
 import Image from "next/image";
 import GoogleButton from "./components/GoogleButton";
 import { getPosts, postPosts } from "../../sanity/sanity-utils";
-import { Project } from "../../types/Post";
+
 import SendButton from "./components/SendButton";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";

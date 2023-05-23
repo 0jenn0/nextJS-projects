@@ -1,6 +1,6 @@
 import { PortableTextBlock, insert } from "sanity";
 import { createClient, groq } from "next-sanity";
-import { Project } from "../types/Post";
+import { Post } from "../types/Post";
 import { useSession } from "next-auth/react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
@@ -56,7 +56,7 @@ export async function isFollow(
   // return result;
 }
 
-export async function getPosts(): Promise<Project[]> {
+export async function getPosts(): Promise<Post[]> {
   return client.fetch(
     groq`*[_type == "project" ]{
         _id,
