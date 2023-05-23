@@ -36,5 +36,17 @@ export default defineType({
       type: "array",
       of: [{ type: "reference", to: [{ type: "userCustom" }] }],
     },
+    {
+      name: "liked",
+      title: "Liked",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "project" }] }],
+    },
+    {
+      name: "bookmark",
+      title: "Bookmark",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "project" }] }],
+    },
   ],
 });

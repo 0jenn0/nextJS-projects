@@ -25,25 +25,25 @@ export default function FollowButton({ mailOfUser, mailToFollow }: Props) {
   // }, [setIsFollowState]);
 
   const handleFollow = async () => {
-    console.log("-------handleUnfollow 시작-----");
+    // console.log("-------handleUnfollow 시작-----");
     followUser(mailOfUser, mailToFollow);
     const result = await isFollow(mailOfUser, mailToFollow);
     // console.log("팔로우를 하고있나? =>", result);
     // setIsFollowState((prev) => result);
     setIsFollowState((prev) => !prev);
-    console.log("-------handleUnfollow 시작-----");
+    // console.log("-------handleUnfollow 시작-----");
 
     // console.log(isFollowState);
     // setIsFollowState((prev) => !prev);
   };
 
   const handleUnfollow = async () => {
-    console.log("-------handle Unfollow 시작-----");
+    // console.log("-------handle Unfollow 시작-----");
 
     unfollowUser(mailOfUser, mailToFollow);
     const result = await isFollow(mailOfUser, mailToFollow);
     setIsFollowState((prev) => !prev);
-    console.log("-------handle Unfollow 끝-----");
+    // console.log("-------handle Unfollow 끝-----");
   };
 
   const toggleState = () => {

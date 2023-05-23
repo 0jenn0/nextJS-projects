@@ -12,22 +12,22 @@ const project = {
     },
 
     {
-      name: "image",
-      title: "Image",
-      type: "image",
-      options: { hotspot: true },
-      // fields: [
-      //   {
-      //     name: "alt",
-      //     title: "Alt",
-      //     type: "string",
-      //   },
-      // ],
+      name: "imageUrl",
+      title: "Image Url",
+      type: "string",
+      // options: { hotspot: true },
+      // // fields: [
+      // //   {
+      // //     name: "alt",
+      // //     title: "Alt",
+      // //     type: "string",
+      // //   },
+      // // ],
     },
 
     {
-      name: "content",
-      title: "Content",
+      name: "text",
+      title: "Text",
       type: "array",
       of: [{ type: "block" }],
     },

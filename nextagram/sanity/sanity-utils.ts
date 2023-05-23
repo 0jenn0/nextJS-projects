@@ -7,6 +7,7 @@ import { authOptions } from "@/lib/auth";
 import { client } from "@/lib/sanity";
 import { v4 as uuid } from "uuid";
 import { log } from "console";
+import { createReadStream } from "fs";
 
 // user = email,image,name,follow,liked,bookmark
 
@@ -20,7 +21,7 @@ export async function isFollow(
   mailOfUser: string,
   mailToFollow: string
 ): Promise<boolean> {
-  console.log(mailOfUser, mailToFollow);
+  // console.log(mailOfUser, mailToFollow);
 
   const followQuery1 = `*[_type == 'userCustom' && email==$mailOfUser1].following`;
   const params2 = { mailOfUser1: mailOfUser };
@@ -31,11 +32,11 @@ export async function isFollow(
   const idToFollow = get_IdByEmail(mailToFollow);
   const [res1, res2] = await Promise.all([following1, idToFollow]);
   if (res1[1] == null) {
-    console.log("following은 null이다");
-    console.log("isFollow함수", mailOfUser, mailToFollow);
+    // console.log("following은 null이다");
+    // console.log("isFollow함수", mailOfUser, mailToFollow);
     return false;
   }
-  console.log("following은 null이 아니다 ㅎ");
+  // console.log("following은 null이 아니다 ㅎ");
 
   const result = res1[1].some((obj: Obj) => obj._ref == res2);
   return result;
@@ -71,7 +72,7 @@ export async function getPosts(): Promise<Project[]> {
 
 export async function postPosts(data: any) {
   const result = client.create(data);
-
+  console.log("post send 성공");
   return result;
 }
 
@@ -90,19 +91,19 @@ export async function followUser(mailOfUser: string, mailToFollow: string) {
   const params = { mailOfUser: mailOfUser };
   const following = await client.fetch(followingQuery, params);
   //const isFollow = following[0].some((obj: any) => obj._ref == userId);
-  console.log("follll", following);
+  // console.log("follll", following);
 
   if (following[1] == null || following[1].length == 0) {
-    console.log("팔로우 하나도 없다가 시도");
+    // console.log("팔로우 하나도 없다가 시도");
     try {
       const email = mailToFollow;
-      console.log("email", email);
+      // console.log("email", email);
 
       const userIdToFollow = await get_IdByEmail(email);
-      console.log("userIdToFollow", userIdToFollow[0]); // null !!!
+      // console.log("userIdToFollow", userIdToFollow[0]); // null !!!
 
       if (!userId) {
-        console.error("No user found with the specified email");
+        // console.error("No user found with the specified email");
         return null;
       }
 
@@ -116,7 +117,7 @@ export async function followUser(mailOfUser: string, mailToFollow: string) {
         .then((updatedUser) => {
           console.log("Follow : Updated user", updatedUser);
         });
-      console.log("following success");
+      // console.log("following success");
       return result;
     } catch (error) {
       console.error("An error occurred 으랴랴랴랴:", error);
@@ -124,9 +125,9 @@ export async function followUser(mailOfUser: string, mailToFollow: string) {
   } else {
     // const isFollow = following[1].some((obj: Obj) => obj._ref === idToFollow);
     const result = await isFollow(mailOfUser, mailToFollow);
-    console.log("중간체쿠ㅡ", following[1]);
+    // console.log("중간체쿠ㅡ", following[1]);
     if (result == true) {
-      console.log("이미 follow중 입니다.");
+      // console.log("이미 follow중 입니다.");
     } else {
       try {
         const email = mailToFollow; // replace with the email of the user you want to modify
@@ -179,3 +180,7 @@ export async function unfollowUser(mailOfUser: string, mailToFollow: string) {
       console.error("Error:", err);
     });
 }
+
+// export async function sendImage() {
+//   client.assets.upload('image',)
+// }
