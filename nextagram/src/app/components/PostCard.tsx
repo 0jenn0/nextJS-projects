@@ -6,14 +6,23 @@ import { client } from "@/lib/sanity";
 import { Post } from "../../../types/Post";
 import Image from "next/image";
 import { AiOutlineHeart } from "react-icons/ai";
-import { BsBookmark, BsHeart } from "react-icons/bs";
+import {
+  BsBookmark,
+  BsBookmarkFill,
+  BsHeart,
+  BsHeartFill,
+} from "react-icons/bs";
 import { SlEmotsmile } from "react-icons/sl";
+import { useState } from "react";
 
 export default function PostCard({ post, id }: { post: Post; id: string }) {
   const userQuery = useSWR(
     groq`*[_type == "userCustom"][email=="${id}@gmail.com"]`,
     (query) => client.fetch(query)
   );
+
+  const [liked, setLiked] = useState<boolean>(false);
+  const [bookmark, setBookmark] = useState<boolean>(false);
 
   if (userQuery.isLoading == true) return <div> Loading . . . </div>;
 
@@ -27,8 +36,9 @@ export default function PostCard({ post, id }: { post: Post; id: string }) {
           width={40}
           height={40}
           className="rounded-full"
+          alt="Profile Image"
         />
-        <p>jenn0.6n</p>
+        <p className="font-semibold text-sm">jenn0.6n</p>
       </header>
       <Image
         src={post.imageUrl}
@@ -40,12 +50,16 @@ export default function PostCard({ post, id }: { post: Post; id: string }) {
       {/* <p>{post.text[0].}</p> */}
       <article className=" py-3  w-96 mx-auto gap-2">
         <div className="flex justify-between items-center text-xl mb-3">
-          <BsHeart />
-          <BsBookmark />
+          <button onClick={() => setLiked((prev) => !prev)}>
+            {liked ? <BsHeartFill className="text-red-600" /> : <BsHeart />}
+          </button>
+          <button onClick={() => setBookmark((prev) => !prev)}>
+            {bookmark ? <BsBookmarkFill /> : <BsBookmark />}
+          </button>
         </div>
-        <p>1 liked</p>
-        <div className="flex gap-2">
-          <p className="font-semibold">{post.user}</p>
+        <p>{`${post.liked ? post.liked : 0} liked`}</p>
+        <div className="flex gap-2 items-center">
+          <p className="font-semibold text-sm">{post.user}</p>
           <p>{post.text[0].children[0].text}</p>
         </div>
       </article>

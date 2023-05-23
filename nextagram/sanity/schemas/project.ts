@@ -42,6 +42,17 @@ const project = {
       title: "Created At",
       type: "datetime",
     },
+    {
+      name: "liked",
+      title: "Liked",
+      type: "number",
+    },
+    {
+      name: "comments",
+      title: "Comments",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "comment" }] }],
+    },
   ],
 };
 

@@ -20,4 +20,6 @@ export type Post = {
   text: any;
   user: string;
   createdAt: Date;
+  liked: number;
+  comment: Document;
 };

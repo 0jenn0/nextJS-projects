@@ -4,7 +4,7 @@ import { Post } from "../../../types/Post";
 import useSWR from "swr";
 import { groq } from "next-sanity";
 import { client } from "@/lib/sanity";
-import PostCard from "./Post";
+import PostCard from "./PostCard";
 
 export default function GridPosts({ email }: { email: string }) {
   const id = email.split("%40")[0];

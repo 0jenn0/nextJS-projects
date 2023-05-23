@@ -6,7 +6,7 @@ import groq from "groq";
 import FollowButton from "@/app/components/FollowButton";
 import UserHeader from "@/app/components/UserHeader";
 import { isFollow } from "../../../../sanity/sanity-utils";
-import PostCard from "@/app/components/Post";
+import PostCard from "@/app/components/PostCard";
 import { Post } from "../../../../types/Post";
 import GridPosts from "@/app/components/GridPosts";
 
