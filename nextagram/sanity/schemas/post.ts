@@ -1,41 +1,60 @@
-import { defineType, defineField } from "sanity";
-// import { useSession } from "next-auth/react";
+//
 
-// const { data } = useSession();
-// const user = data!.user!;
-// const { email, image, name } = user;
-
-export default defineType({
+const project = {
   name: "post",
   title: "Post",
   type: "document",
   fields: [
-    // {
-    //   name: "user",
-    //   title: "User",
-    //   type: "reference",
-    //   to: { type: "user" },
-    //   //   type: "array",
-    //   //   of: [{ type: "reference", to: { type: "user" } }],
-    // },
-    defineField({
+    {
+      name: "name",
+      title: "Name",
+      type: "string",
+    },
+
+    {
+      name: "imageUrl",
+      title: "Image Url",
+      type: "string",
+      // options: { hotspot: true },
+      // // fields: [
+      // //   {
+      // //     name: "alt",
+      // //     title: "Alt",
+      // //     type: "string",
+      // //   },
+      // // ],
+    },
+
+    {
+      name: "text",
+      title: "Text",
+      type: "array",
+      of: [{ type: "block" }],
+    },
+
+    {
+      name: "user",
+      title: "User",
+      type: "reference",
+      to: { type: "userCustom" },
+    },
+    {
       name: "createdAt",
       title: "Created At",
       type: "datetime",
-    }),
-    defineField({
-      name: "image",
-      title: "Image",
-      type: "image",
-    }),
-    // defineField({
-    //     name: 'user',
-    //     title: 'User',
-    //     type: 'reference',
-    // })
+    },
+    {
+      name: "liked",
+      title: "Liked",
+      type: "number",
+    },
+    {
+      name: "comments",
+      title: "Comments",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "comment" }] }],
+    },
   ],
-});
+};
 
-/**
- *
- */
+export default project;

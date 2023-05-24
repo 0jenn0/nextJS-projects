@@ -13,6 +13,7 @@ export default async function Home() {
   // const send = await postPosts();
 
   const session = await getServerSession(authOptions);
+
   // return (
   //   <>
   //     <h1>HOME</h1>

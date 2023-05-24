@@ -40,13 +40,13 @@ export default defineType({
       name: "liked",
       title: "Liked",
       type: "array",
-      of: [{ type: "reference", to: [{ type: "project" }] }],
+      of: [{ type: "reference", to: [{ type: "post" }] }],
     },
     {
       name: "bookmark",
       title: "Bookmark",
       type: "array",
-      of: [{ type: "reference", to: [{ type: "project" }] }],
+      of: [{ type: "reference", to: [{ type: "post" }] }],
     },
   ],
 });

@@ -12,11 +12,12 @@ export default function SendButton({
 }) {
   const { data } = useSession();
   const user = data?.user;
-  const userId = user?.email?.split("@")[0];
+  const userEmail = user?.email as string;
+  const userId = user?.email?.split(/@|%40/)[0];
   const date = new Date();
 
   const post = {
-    _type: "project",
+    _type: "post",
     _id: uuid(),
     name: `post | ${userId} `,
     text: [
@@ -35,8 +36,7 @@ export default function SendButton({
       },
     ],
     imageUrl: imgUrl,
-    user: userId,
     createdAt: date,
   };
-  return <button onClick={() => postPosts(post)}>보내기!!</button>;
+  return <button onClick={() => postPosts(post, userEmail)}>보내기!!</button>;
 }

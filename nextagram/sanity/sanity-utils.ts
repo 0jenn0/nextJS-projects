@@ -58,7 +58,7 @@ export async function isFollow(
 
 export async function getPosts(): Promise<Post[]> {
   return client.fetch(
-    groq`*[_type == "project" ]{
+    groq`*[_type == "post" ]{
         _id,
         _createdAt,
         name,
@@ -70,10 +70,17 @@ export async function getPosts(): Promise<Post[]> {
   );
 }
 
-export async function postPosts(data: any) {
-  const result = client.create(data);
-  console.log("post send 성공");
-  return result;
+export async function postPosts(post: any, userEmail: string) {
+  const userId = await get_IdByEmail(userEmail);
+  try {
+    const result = await client.create({
+      ...post,
+      user: { _type: "reference", _ref: userId[1] },
+    });
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 async function get_IdByEmail(email: string) {
