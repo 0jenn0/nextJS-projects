@@ -9,6 +9,7 @@ import NewIcon from "./ui/icons/NewIcon";
 import NewFillIcon from "./ui/icons/NewFillIcon";
 import { usePathname } from "next/navigation";
 import ColorButton from "./ColorButton";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 const menu = [
   { href: "/", icon: HomeIcon(), clickedIcon: HomeFillIcon() },
@@ -17,6 +18,7 @@ const menu = [
 ];
 
 export default function Header() {
+  const { data: session } = useSession();
   const pathname = usePathname();
   return (
     <header className="w-full  border-b border-gray-200 flex justify-between items-center py-2 px-4">
@@ -29,7 +31,11 @@ export default function Header() {
             </li>
           ))}
         </ul>
-        <ColorButton text={"Sign in "} onClick={() => {}} />
+        {session ? (
+          <ColorButton text={"Sign Out "} onClick={() => signOut()} />
+        ) : (
+          <ColorButton text={"Sign in "} onClick={() => signIn("google")} />
+        )}
       </nav>
     </header>
   );
