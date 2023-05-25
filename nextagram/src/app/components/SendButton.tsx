@@ -15,6 +15,7 @@ export default function SendButton({
   const userEmail = user?.email as string;
   const userId = user?.email?.split(/@|%40/)[0];
   const date = new Date();
+  console.log(userId);
 
   const post = {
     _type: "post",

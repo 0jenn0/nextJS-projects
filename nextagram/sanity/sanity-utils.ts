@@ -56,27 +56,33 @@ export async function isFollow(
   // return result;
 }
 
-export async function getPosts(): Promise<Post[]> {
-  return client.fetch(
-    groq`*[_type == "post" ]{
-        _id,
-        _createdAt,
-        name,
-        "slug": slug.current,
-        "image": image.asset->url,
-        url,
-        content
-    }`
+export async function getPosts(_id: string) {
+  const posts = await client.fetch(
+    groq`*[_type == 'post' && user._ref == ${_id}]`
   );
+  posts.sort((a: any, b: any) => b._createdAt - a._createdAt);
+  return posts;
 }
 
 export async function postPosts(post: any, userEmail: string) {
   const userId = await get_IdByEmail(userEmail);
+  console.log("postPosts에서 받은 : ", userId);
   try {
     const result = await client.create({
       ...post,
-      user: { _type: "reference", _ref: userId[1] },
+      user: { _type: "reference", _ref: userId },
     });
+
+    const result1 = await client
+      .patch(userId)
+      .setIfMissing({ posts: [] })
+      .insert("after", "posts[-1]", [{ _type: "reference", _ref: post._id }])
+      .commit()
+      .then((updatedUser) => {
+        console.log("됏나봐");
+      });
+
+    console.log("post 보내짐");
     return result;
   } catch (error) {
     console.log(error);
@@ -84,11 +90,12 @@ export async function postPosts(post: any, userEmail: string) {
 }
 
 async function get_IdByEmail(email: string) {
+  console.log("get_IdByemail에서 받은 email", email);
   const userQuery = `*[_type == 'userCustom' && email==$emailValue]._id`;
   const params = { emailValue: email };
   const userId: string = await client.fetch(userQuery, params);
-
-  return userId;
+  console.log(userId);
+  return userId[0];
 }
 
 export async function followUser(mailOfUser: string, mailToFollow: string) {

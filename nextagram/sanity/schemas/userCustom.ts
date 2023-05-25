@@ -25,6 +25,12 @@ export default defineType({
       title: "Image",
       type: "url",
     },
+    {
+      name: "posts",
+      title: "Posts",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "post" }] }],
+    },
     // {
     //   name: "following",
     //   title: "Following",
