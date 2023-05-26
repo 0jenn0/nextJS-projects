@@ -1,15 +1,17 @@
-"use client";
+import SignIn from "@/components/SignIn";
 
-import ColorButton from "@/components/ColorButton";
-import { signIn } from "next-auth/react";
+import { getServerSession } from "next-auth";
+import { getProviders } from "next-auth/react";
+import { redirect } from "next/navigation";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
-export default function SignInPage() {
-  return (
-    <div className="flex justify-center mt-20">
-      <ColorButton
-        text="Sign In with Google"
-        onClick={() => signIn("google")}
-      />
-    </div>
-  );
+export default async function SignPage() {
+  const session = await getServerSession(authOptions);
+
+  if (session) {
+    redirect("/new");
+  }
+
+  const providers = (await getProviders()) ?? {};
+  return <SignIn providers={providers} />;
 }

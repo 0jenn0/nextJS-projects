@@ -34,7 +34,8 @@ export default function Header() {
         {session ? (
           <ColorButton text={"Sign Out "} onClick={() => signOut()} />
         ) : (
-          <ColorButton text={"Sign in "} onClick={() => signIn("google")} />
+          <ColorButton text={"Sign in "} onClick={() => signIn()} />
+          // signIn('google')하면 authOptions의 page 설정 안들음
         )}
       </nav>
     </header>
