@@ -1,20 +1,24 @@
 "use client";
 
 import { ClientSafeProvider, signIn } from "next-auth/react";
+import ColorButton from "./ColorButton";
 
 type Props = {
   providers: Record<string, ClientSafeProvider>;
+  callbackUrl: string;
 };
 
-export default function SignIn({ providers }: Props) {
+export default function SignIn({ providers, callbackUrl }: Props) {
   console.log("signIn.tsx");
   return (
     <>
       {Object.values(providers).map((provider) => (
         <div key={provider.name}>
-          <button onClick={() => signIn(provider.id)}>
-            Sign in with {provider.name}
-          </button>
+          <ColorButton
+            text={`Sign in with ${provider.name}`}
+            onClick={() => signIn(provider.id, { callbackUrl })}
+            size="big"
+          />
         </div>
       ))}
     </>

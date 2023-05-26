@@ -23,8 +23,8 @@ export default function Header() {
   return (
     <header className="w-full  border-b border-gray-200 flex justify-between items-center py-2 px-4">
       <h1 className="text-2xl font-semibold">Nextagram</h1>
-      <nav className="text-2xl flex gap-4 items-center">
-        <ul className="flex gap-3">
+      <nav className=" flex gap-4 items-center">
+        <ul className="flex gap-3 ">
           {menu.map(({ href, icon, clickedIcon }) => (
             <li key={href}>
               <Link href={href}>{pathname !== href ? icon : clickedIcon}</Link>
@@ -32,9 +32,17 @@ export default function Header() {
           ))}
         </ul>
         {session ? (
-          <ColorButton text={"Sign Out "} onClick={() => signOut()} />
+          <ColorButton
+            text={"Sign Out"}
+            onClick={() => signOut()}
+            size={"small"}
+          />
         ) : (
-          <ColorButton text={"Sign in "} onClick={() => signIn()} />
+          <ColorButton
+            text={"Sign in"}
+            onClick={() => signIn()}
+            size={"small"}
+          />
           // signIn('google')하면 authOptions의 page 설정 안들음
         )}
       </nav>
