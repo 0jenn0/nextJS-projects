@@ -21,6 +21,18 @@ export const authOptions: NextAuthOptions = {
   pages: {
     signIn: "/auth/signin",
   },
+  callbacks: {
+    async session({ session }) {
+      const user = session?.user;
+      if (user) {
+        session.user = {
+          ...user,
+          username: user.email?.split("@")[0] || "",
+        };
+      }
+      return session;
+    },
+  },
 };
 
 const handler = NextAuth(authOptions);
