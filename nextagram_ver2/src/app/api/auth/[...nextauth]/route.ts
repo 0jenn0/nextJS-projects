@@ -10,6 +10,7 @@ import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { signIn } from "next-auth/react";
 import { NextAuthOptions } from "next-auth";
+import { addUser } from "@/service/user";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -32,7 +33,17 @@ export const authOptions: NextAuthOptions = {
       }
       return session;
     },
-    async signIn({ user }) {
+    async signIn({ user: { id, name, image, email } }) {
+      if (!email) {
+        return false;
+      }
+      addUser({
+        id,
+        name: name || "",
+        image,
+        email,
+        username: email?.split("@")[0] || "",
+      });
       return true;
     },
   },
