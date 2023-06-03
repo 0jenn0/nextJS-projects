@@ -15,10 +15,10 @@ export default function PostList() {
   if (!loading) <p>Loading .. </p>;
   console.log("posts:", posts);
   return (
-    <>
+    <section className="flex flex-col gap-5 items-center">
       {posts?.length !== 0 && posts
         ? posts.map((post: Post) => <PostCard post={post} />)
         : ""}
-    </>
+    </section>
   );
 }
