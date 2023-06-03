@@ -6,4 +6,5 @@ export type Post = {
   comments: [{ comment: string; author: SimpleUser }];
   likes: SimpleUser[];
   photo: string;
+  updatedAt: Date;
 };

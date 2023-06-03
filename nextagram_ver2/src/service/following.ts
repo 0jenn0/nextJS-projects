@@ -14,7 +14,8 @@ export async function getPostsByUsername(username: string) {
         'comments': comments[]{
           comment,
         author -> {username,image}
-        }
+        },
+        'updatedAt' : _updatedAt
       }`
   );
   return data;

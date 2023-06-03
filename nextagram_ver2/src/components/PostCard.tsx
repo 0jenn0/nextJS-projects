@@ -9,6 +9,7 @@ import {
   BsBookmarkFill,
 } from "react-icons/bs";
 import { VscSmiley } from "react-icons/vsc";
+import { format, render, cancel, register } from "timeago.js";
 
 const builder = imageUrlBuilder({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "",
@@ -19,12 +20,13 @@ function urlFor(source: string) {
   return builder.image(source);
 }
 
-export default function PostCard({ post }: { post: Post }) {
-  console.log(post.photo);
-  console.log(urlFor(post.photo).width(720).url());
+type Props = {
+  post: Post;
+};
 
+export default function PostCard({ post }: Props) {
   return (
-    <section className="shadow-lg shadow-neutral-100  w-3/4 border border-neutral-200 rounded-2xl">
+    <section className=" shadow-lg shadow-neutral-100  w-3/4 border border-neutral-200 rounded-2xl">
       <div className="flex gap-2 items-center p-3">
         <Avatar image={post.author.image} />
         <p className="font-semibold">{post.author.username}</p>
@@ -48,10 +50,13 @@ export default function PostCard({ post }: { post: Post }) {
           {post.likes && post.likes.length >= 2 ? " likes" : " like"}
         </p>
       </div>
-      <div className="flex gap-2 p-3">
+      <div className="flex gap-2 px-3 pt-3 pb-1">
         <p className="font-semibold">{post.author.username}</p>
         <p className="font-[2]">{post.comments[0].comment}</p>
       </div>
+      <p className="px-3 text-sm text-neutral-500 pb-3">
+        {format(post.updatedAt)}
+      </p>
       <form
         action="submit"
         className="w-full flex items-center border-t border-neutral-200"
