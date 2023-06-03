@@ -1,3 +1,24 @@
+"use client";
+
+import useSWR from "swr";
+import { SimpleUser } from "@/model/user";
+import { Post } from "@/model/post";
+import PostCard from "./PostCard";
+
 export default function PostList() {
-  return <div></div>;
+  const {
+    data: posts,
+    isLoading: loading,
+    error,
+  } = useSWR<Post[]>("/api/following");
+
+  if (!loading) <p>Loading .. </p>;
+  console.log("posts:", posts);
+  return (
+    <>
+      {posts?.length !== 0 && posts
+        ? posts.map((post: Post) => <PostCard post={post} />)
+        : ""}
+    </>
+  );
 }

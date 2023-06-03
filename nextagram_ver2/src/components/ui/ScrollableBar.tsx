@@ -3,6 +3,7 @@ import SwiperCore, { Navigation, Scrollbar } from "swiper";
 import { GrNext, GrPrevious } from "react-icons/gr";
 import Link from "next/link";
 import Avatar from "../Avatar";
+import { v4 as uuid } from "uuid";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -32,8 +33,8 @@ export default function ScrollableBar({ users }: { users: SimpleUser[] }) {
         className="w-100"
       >
         {users.map(({ username, image }) => (
-          <SwiperSlide>
-            <li key={username}>
+          <SwiperSlide key={uuid()}>
+            <li>
               <Link
                 href={`/user/${username}`}
                 className="flex flex-col items-center justify-center w-20"

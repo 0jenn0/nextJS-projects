@@ -25,7 +25,7 @@ export default defineType({
     }),
     defineField({
       title: 'Comments',
-      name: 'comment',
+      name: 'comments',
       type: 'array',
       of: [
         {
@@ -51,7 +51,7 @@ export default defineType({
   ],
   preview: {
     select: {
-      title: 'comment.0.comment',
+      title: 'comments.0.comment',
       authorName: 'author.name',
       authorUsername: 'author.username',
       media: 'photo',
