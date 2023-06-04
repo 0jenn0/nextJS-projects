@@ -3,33 +3,22 @@ import { client } from "./sanity";
 import { getUserByUsername } from "./user";
 import { Post } from "@/model/post";
 
-export async function getPostsByUsername(username: string) {
-  const data = await client.fetch(
-    `*[_type == "post" && author._ref in *[_type=="user" && username=="${username}"]._id]{
-        ...,
-        'id': _id,
-        author -> {username,image},
-        'photo' : photo.asset._ref,
-        'likes' : likes[] -> {username,image},
-        'comments': comments[]{
-          comment,
-        author -> {username,image}
-        },
-        'updatedAt' : _updatedAt
-      }`
-  );
-  return data;
-}
+const simplePostProjection = `
+...,
+'username': author -> username,
+'userImage' : author -> image,
+'imamge' : photo,
+'likes': likes[]-> username,
+'text' : comments[0].comment,
+'comments' : count(comments),
+'id':_id,
+'createdAt':_createdAt
+`;
 
-export async function getFollowingByUsername(username: string) {
-  const user = await getUserByUsername(username);
-  const arr = await Promise.all(
-    user.following.map((user: SimpleUser) => getPostsByUsername(user.username))
+export async function getFollowingPostOf(username: string) {
+  return client.fetch(
+    `*[_type == "post" && author->username == "${username}"
+     || author._ref in *[_type == "user" && username == "${username}"].following[]._ref]
+     | order(_createdAt desc){${simplePostProjection}}`
   );
-  const newArr = [...arr].filter((item: Array<any>) => item.length > 0);
-  const arr2 = newArr.reduce(function (acc, cur) {
-    return [...acc, ...cur];
-  });
-  console.log(arr2);
-  return arr2;
 }

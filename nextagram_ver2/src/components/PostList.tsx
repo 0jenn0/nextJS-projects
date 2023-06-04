@@ -10,7 +10,7 @@ export default function PostList() {
     data: posts,
     isLoading: loading,
     error,
-  } = useSWR<Post[]>("/api/following");
+  } = useSWR<Post[]>("/api/posts");
 
   if (!loading) <p>Loading .. </p>;
   console.log("posts:", posts);

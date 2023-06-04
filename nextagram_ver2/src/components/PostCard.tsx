@@ -28,8 +28,8 @@ export default function PostCard({ post }: Props) {
   return (
     <section className=" shadow-lg shadow-neutral-100  w-3/4 border border-neutral-200 rounded-2xl">
       <div className="flex gap-2 items-center p-3">
-        <Avatar image={post.author.image} />
-        <p className="font-semibold">{post.author.username}</p>
+        <Avatar image={post.userImage} />
+        <p className="font-semibold">{post.username}</p>
       </div>
       <img
         className="w-full aspect-square  object-cover"
@@ -51,11 +51,11 @@ export default function PostCard({ post }: Props) {
         </p>
       </div>
       <div className="flex gap-2 px-3 pt-3 pb-1">
-        <p className="font-semibold">{post.author.username}</p>
-        <p className="font-[2]">{post.comments[0].comment}</p>
+        <p className="font-semibold">{post.username}</p>
+        <p className="font-[2]">{post.text}</p>
       </div>
       <p className="px-3 text-sm text-neutral-500 pb-3">
-        {format(post.updatedAt)}
+        {format(post.createdAt)}
       </p>
       <form
         action="submit"
