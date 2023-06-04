@@ -1,13 +1,10 @@
-import { SimpleUser } from "./../model/user";
 import { client } from "./sanity";
-import { getUserByUsername } from "./user";
-import { Post } from "@/model/post";
 
 const simplePostProjection = `
 ...,
 'username': author -> username,
 'userImage' : author -> image,
-'imamge' : photo,
+'image' : photo,
 'likes': likes[]-> username,
 'text' : comments[0].comment,
 'comments' : count(comments),

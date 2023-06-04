@@ -1,4 +1,4 @@
-import { Post } from "@/model/post";
+import { SimplePost } from "@/model/post";
 import Avatar from "./Avatar";
 import imageUrlBuilder from "@sanity/image-url";
 import { client } from "@/service/sanity";
@@ -21,7 +21,7 @@ function urlFor(source: string) {
 }
 
 type Props = {
-  post: Post;
+  post: SimplePost;
 };
 
 export default function PostCard({ post }: Props) {
@@ -33,7 +33,7 @@ export default function PostCard({ post }: Props) {
       </div>
       <img
         className="w-full aspect-square  object-cover"
-        src={urlFor(post.photo).width(400).crop("center").url()}
+        src={urlFor(post.image).width(400).crop("center").url()}
         alt="photo"
       />
       <div className="p-3 flex justify-between text-xl">
