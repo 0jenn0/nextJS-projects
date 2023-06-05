@@ -1,8 +1,9 @@
 "use client";
 
 import useSWR from "swr";
-import PostCard from "./PostCard";
+import PostListCard from "./PostListCard";
 import { SimplePost } from "@/model/post";
+import { GridLoader } from "react-spinners";
 
 export default function PostList() {
   const {
@@ -15,9 +16,20 @@ export default function PostList() {
   console.log("posts:", posts);
   return (
     <section className="flex flex-col gap-5 items-center">
-      {posts?.length !== 0 && posts
-        ? posts.map((post: SimplePost) => <PostCard post={post} />)
-        : ""}
+      {loading && (
+        <div>
+          <GridLoader color="red" />
+        </div>
+      )}
+      {posts && (
+        <ul>
+          {posts.map((post: SimplePost) => (
+            <li key={post.id} className="flex items-center justify-center">
+              <PostListCard post={post} />
+            </li>
+          ))}
+        </ul>
+      )}
     </section>
   );
 }
