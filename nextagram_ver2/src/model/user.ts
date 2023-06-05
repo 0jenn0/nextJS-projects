@@ -13,7 +13,7 @@ export type DetailUser = User & {
   bookmarks: string[];
 };
 
-export type UserBySearch = SimpleUser & {
+export type UserBySearch = User & {
   following: null | number;
   followers: null | number;
 };

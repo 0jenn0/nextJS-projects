@@ -10,9 +10,9 @@ export default function page() {
   if (loading) return <p className="font-3xl">Laoding</p>;
 
   return (
-    <section>
+    <section className="w-1/2 mt-3">
       <form action="submit"></form>
-      <ul>
+      <ul className="flex flex-col gap-3">
         <UserListCard user={data.me} />
         {data.other.map((user: UserBySearch) => (
           <li key={user.username}>
