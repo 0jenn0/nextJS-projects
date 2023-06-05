@@ -1,3 +1,25 @@
+"use client";
+
+import UserListCard from "@/components/UserListCard";
+import { UserBySearch } from "@/model/user";
+import useSWR from "swr";
+
 export default function page() {
-  return <div>search</div>;
+  const { data, isLoading: loading, error } = useSWR("/api/search");
+
+  if (loading) return <p className="font-3xl">Laoding</p>;
+
+  return (
+    <section>
+      <form action="submit"></form>
+      <ul>
+        <UserListCard user={data.me} />
+        {data.other.map((user: UserBySearch) => (
+          <li key={user.username}>
+            <UserListCard user={user} />
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
 }
