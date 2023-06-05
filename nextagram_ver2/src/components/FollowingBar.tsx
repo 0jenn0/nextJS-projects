@@ -3,17 +3,13 @@
 import { DetailUser, User } from "@/model/user";
 import { PropagateLoader } from "react-spinners";
 import useSWR from "swr";
-import Avatar from "./Avatar";
-import Link from "next/link";
 import ScrollableBar from "./ui/ScrollableBar";
-import Carousel from "react-multi-carousel";
-import { SwiperSlide } from "swiper/react";
 
 type Props = {
   user: User;
 };
 
-export default function FollowingBar({ user: { username } }: Props) {
+export default function FollowingBar() {
   const { data, isLoading: loading, error } = useSWR<DetailUser>("/api/me");
   const users = data?.following && [
     ...data?.following,

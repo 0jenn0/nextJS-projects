@@ -9,7 +9,6 @@ type Props = {
 };
 
 export default function SignIn({ providers, callbackUrl }: Props) {
-  console.log("signIn.tsx");
   return (
     <>
       {Object.values(providers).map((provider) => (

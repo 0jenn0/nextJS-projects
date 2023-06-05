@@ -6,7 +6,7 @@ import Avatar from "../Avatar";
 import { v4 as uuid } from "uuid";
 
 import "swiper/css";
-import "swiper/css/navigation";
+// import "swiper/css/navigation";
 // import "swiper/css/scollbar";
 
 import { useRef } from "react";

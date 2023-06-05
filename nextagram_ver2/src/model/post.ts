@@ -23,7 +23,7 @@ export type FullPost = {
   text: string;
   createdAt: string;
   likes: string[];
-  comment: Comment[];
+  comments: Comment[];
 };
 
 export type SimplePost = Omit<FullPost, "comments"> & {
