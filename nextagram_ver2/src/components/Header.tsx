@@ -24,7 +24,7 @@ export default function Header() {
   const user = session?.user;
 
   return (
-    <header className="w-full  border-b border-gray-200 flex justify-between items-center py-2 px-4">
+    <header className="w-full flex justify-between items-center py-2 px-4">
       <h1 className="text-2xl font-semibold">Nextagram</h1>
       <nav className=" flex gap-4 items-center">
         <ul className="flex gap-3 ">

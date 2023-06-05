@@ -21,7 +21,7 @@ export default function PostList() {
         </div>
       )}
       {posts && (
-        <ul className="w-full">
+        <ul className="w-full flex flex-col gap-5">
           {posts.map((post: SimplePost, index) => (
             <li key={post.id} className="flex items-center justify-center">
               <PostListCard post={post} priority={index < 2} />
