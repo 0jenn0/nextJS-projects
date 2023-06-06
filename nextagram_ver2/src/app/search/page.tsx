@@ -6,52 +6,42 @@ import { UserBySearch } from "@/model/user";
 import { useState } from "react";
 import useSWR from "swr";
 
-type InputValue = {
-  tempt: string;
-  keyword: string;
+type LoginedSearchResult = {
+  me?: UserBySearch[];
+  other?: UserBySearch[];
 };
 
 export default function page() {
-  const [inputValue, setInputValue] = useState<InputValue>({
-    tempt: "",
-    keyword: "",
-  });
-  const {
-    data,
-    isLoading: loading,
-    error,
-  } = useSWR(`/api/search/${inputValue.keyword}`);
-
-  if (loading)
-    return (
-      <div className="w-full flex justify-center mt-8">
-        <GridSpinner />
-      </div>
-    );
+  const [keyword, setKeyword] = useState<string>("");
+  const { data, isLoading: loading, error } = useSWR(`/api/search/${keyword}`);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    setInputValue((prev) => ({ ...prev, keyword: prev.tempt }));
     e.preventDefault();
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // inputValue = e.target.value;
-    setInputValue((prev) => ({ ...prev, tempt: e.target.value }));
+    setKeyword(e.target.value);
   };
 
   return (
     <section className="w-1/2 flex flex-col gap-3 items-center">
       <form action="submit" onSubmit={handleSubmit} className="w-full">
         <input
-          value={inputValue.tempt}
+          value={keyword}
           type="text"
           placeholder="Search for a username or name"
           className="w-full outline-none border border-neutral-200 rounded-full px-6 py-3"
           onChange={(e) => handleChange(e)}
+          autoFocus
         />
       </form>
+      {loading && (
+        <div className="w-full flex justify-center mt-8">
+          <GridSpinner />
+        </div>
+      )}
       <ul className="flex flex-col gap-3 w-5/6">
-        {(!data || data.length === 0) && (
+        {data && data.length && data.length === 0 && (
           <p className="text-center text-xl text-neutral-400">
             찾는 사용자가 없습니다.
           </p>
