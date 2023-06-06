@@ -1,6 +1,7 @@
 "use client";
 
 import Avatar from "@/components/Avatar";
+import GridPosts from "@/components/GridPosts";
 import FollowButton from "@/components/ui/FollowButton";
 import { DetailUser, ProfileUser } from "@/model/user";
 import { useState } from "react";
@@ -12,7 +13,9 @@ type Props = {
   };
 };
 
-const menuArr = ["POST", "SAVED", "LIKED"];
+export type Menu = "POST" | "SAVED" | "LIKED";
+
+const menuArr: Menu[] = ["POST", "SAVED", "LIKED"];
 
 export default function page({ params }: Props) {
   const {
@@ -21,7 +24,7 @@ export default function page({ params }: Props) {
     error,
   } = useSWR<ProfileUser>(`/api/profile/${params.username}`);
 
-  const [checked, setChecked] = useState<string>("POST");
+  const [checked, setChecked] = useState<Menu>("POST");
 
   if (loading) return <p>Loading</p>;
 
@@ -58,6 +61,8 @@ export default function page({ params }: Props) {
           ))}
         </ul>
       </menu>
+
+      {user && <GridPosts checked={checked} username={user.username} />}
     </section>
   );
 }
