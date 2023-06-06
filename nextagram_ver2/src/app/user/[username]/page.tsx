@@ -36,7 +36,7 @@ export default function page({ params }: Props) {
           <div>
             <div className="flex gap-2">
               <p>{user.username}</p>
-              <FollowButton />
+              <FollowButton username={params.username} />
             </div>
             <span>{user.posts}</span> <span>posts </span>
             <span>{user.followers}</span> <span>followers </span>

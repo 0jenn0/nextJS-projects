@@ -17,11 +17,14 @@ export default function GridPosts({ checked, username }: Props) {
     error,
   } = useSWR<SimplePost[]>(`/api/profilePost/${username}/${checked}`);
 
-  posts && console.log(posts);
-
   return (
-    <div className="grid grid-cols-3 gap-3 justify-center items-center">
-      {posts && posts.map((post) => <FeedCard post={post} />)}
-    </div>
+    <ul className="grid grid-cols-3 gap-3 justify-center items-center">
+      {posts &&
+        posts.map((post) => (
+          <li key={post.id}>
+            <FeedCard post={post} />
+          </li>
+        ))}
+    </ul>
   );
 }

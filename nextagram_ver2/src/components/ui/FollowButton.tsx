@@ -1,5 +1,9 @@
 "use client";
 
-export default function FollowButton() {
+type Props = {
+  username: string;
+};
+
+export default function FollowButton({ username }: Props) {
   return <button>UnFollow</button>;
 }
