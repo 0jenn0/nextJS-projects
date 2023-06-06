@@ -26,9 +26,9 @@ export default function PostDetailCard({ post }: Props) {
         height={800}
         priority
       />
-      <section className="h-3/5  w-full md:w-2/5 flex flex-col">
+      <section className="h-3/5  w-full flex flex-col md:w-2/5 md:h-auto">
         <PostUserAvatar userImage={userImage} username={username} />
-        <ul className="p-2 flex flex-col gap-2 grow overflow-y-auto">
+        <ul className="p-2 flex flex-col gap-2 overflow-y-auto  grow">
           {comments?.slice(1).map((comment, index) => (
             <li className="flex items-center gap-2" key={index}>
               <Avatar
