@@ -17,8 +17,8 @@ export default function UserListCard({ user }: Props) {
         <p className="text-neutral-500 text-sm">{user.name}</p>
         <div></div>
         <div className="flex gap-2 text-neutral-500 text-sm">
-          <p>{`${user.followers ? user.followers : 0} follower ·`}</p>
-          <p>{`${user.following ? user.following : 0} following`}</p>
+          <p>{`${user.followers} follower ·`}</p>
+          <p>{`${user.following} following`}</p>
         </div>
       </div>
     </Link>

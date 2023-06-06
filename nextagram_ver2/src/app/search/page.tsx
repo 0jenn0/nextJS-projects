@@ -57,19 +57,22 @@ export default function page() {
           </p>
         )}
 
-        {data.me && <UserListCard user={data.me} />}
+        {data && data.me && <UserListCard user={data.me} />}
 
-        {data.other
-          ? data.other.map((user: UserBySearch) => (
-              <li key={user.username}>
-                <UserListCard user={user} />
-              </li>
-            ))
-          : data.map((user: UserBySearch) => (
-              <li key={user.username}>
-                <UserListCard user={user} />
-              </li>
-            ))}
+        {data &&
+          data.other &&
+          data.other.map((user: UserBySearch) => (
+            <li key={user.username}>
+              <UserListCard user={user} />
+            </li>
+          ))}
+        {data &&
+          !data.other &&
+          data.map((user: UserBySearch) => (
+            <li key={user.username}>
+              <UserListCard user={user} />
+            </li>
+          ))}
       </ul>
     </section>
   );

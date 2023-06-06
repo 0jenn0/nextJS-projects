@@ -1,3 +1,4 @@
+import { UserBySearch } from "@/model/user";
 import { client } from "./sanity";
 
 type OAuthUser = {
@@ -41,36 +42,73 @@ export async function getUserByUsername(username: string) {
 
 export async function getUsers(username?: string) {
   if (username) {
-    return client.fetch(
-      `
+    return client
+      .fetch(
+        `
       { "me":*[_type == "user" && username == "${username}"][0]{...,
         'id' : _id,
         'following' : count(following),
         'followers' : count(followers)},
-          "other":*[_type == "user" && username != "jenn0.6n"] | order(username asc){...,
+          "other":*[_type == "user" && username != "${username}"] | order(username asc){...,
         'id' : _id,
         'following' : count(following),
         'followers' : count(followers),}
         }
       `
-    );
+      )
+      .then((data) => {
+        const newData = JSON.parse(JSON.stringify(data)); // Deep copy
+
+        newData.me = Object.assign({}, newData.me, {
+          following: newData.me.following || 0,
+          followers: newData.me.followers || 0,
+        });
+
+        newData.other = newData.other.map((user: UserBySearch) =>
+          Object.assign({}, user, {
+            following: user.following || 0,
+            followers: user.followers || 0,
+          })
+        );
+
+        return newData;
+      });
   }
-  return client.fetch(
-    `
-    *[_type == "user"] | order(username asc){...,
+  return client
+    .fetch(
+      `
+    *[_type == "user"] | order(username asc){
+      ...,
       'id' : _id,
       'following' : count(following),
       'followers' : count(followers),}
     `
-  );
+    )
+    .then((users) =>
+      users.map((user: UserBySearch) => ({
+        ...user,
+        following: user.following ?? 0,
+        followers: user.followers ?? 0,
+      }))
+    );
 }
 
 export async function getUsersBySearch(keyword: string) {
-  return client.fetch(`
+  return client
+    .fetch(
+      `
   *[_type == "user" && (username match "*${keyword}*" || name match "*${keyword}*")]{
     ...,'id' : _id,
     'following' : count(following),
     'followers' : count(followers),
   }
-  `);
+  `
+    )
+    .then((users) =>
+      users.map((user: UserBySearch) => ({
+        ...user,
+        following: user.following ?? 0,
+        followers: user.followers ?? 0,
+      }))
+    );
 }

@@ -7,7 +7,7 @@ export async function GET(request: Request) {
   const session = await getServerSession(authOptions);
   const user = session?.user;
 
-  if (!user) {
+  if (!session) {
     return getUsers().then((data) => NextResponse.json(data));
   }
 
