@@ -1,11 +1,11 @@
 import { NextResponse } from "next/server";
 import { authOptions } from "../../auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
-import { getPost } from "@/service/posts";
+import { getUsersBySearch } from "@/service/user";
 
 type Context = {
   params: {
-    id: string;
+    keyword: string;
   };
 };
 
@@ -16,7 +16,7 @@ export async function GET(request: Request, context: Context) {
   if (!user) {
     return new Response("Authentication Error", { status: 401 });
   }
-
-  return getPost(context.params.id) //
+  console.log("api 발동");
+  return getUsersBySearch(context.params.keyword) //
     .then((data) => NextResponse.json(data));
 }

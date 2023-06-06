@@ -54,3 +54,13 @@ export async function getUsers(username: string) {
     `
   );
 }
+
+export async function getUsersBySearch(keyword: string) {
+  return client.fetch(`
+  *[_type == "user" && (username match "*${keyword}*" || name match "*${keyword}*")]{
+    ...,'id' : _id,
+    'following' : count(following),
+    'followers' : count(followers),
+  }
+  `);
+}
