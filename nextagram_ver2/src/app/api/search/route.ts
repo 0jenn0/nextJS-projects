@@ -8,7 +8,7 @@ export async function GET(request: Request) {
   const user = session?.user;
 
   if (!user) {
-    return new Response("Authentication Error", { status: 401 });
+    return getUsers().then((data) => NextResponse.json(data));
   }
 
   return getUsers(user.username).then((data) => NextResponse.json(data));

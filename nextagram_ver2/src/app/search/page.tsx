@@ -51,7 +51,7 @@ export default function page() {
         />
       </form>
       <ul className="flex flex-col gap-3 w-5/6">
-        {data.length === 0 && (
+        {(!data || data.length === 0) && (
           <p className="text-center text-xl text-neutral-400">
             찾는 사용자가 없습니다.
           </p>

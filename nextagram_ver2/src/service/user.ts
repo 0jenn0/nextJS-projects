@@ -39,18 +39,28 @@ export async function getUserByUsername(username: string) {
   }`);
 }
 
-export async function getUsers(username: string) {
+export async function getUsers(username?: string) {
+  if (username) {
+    return client.fetch(
+      `
+      { "me":*[_type == "user" && username == "${username}"][0]{...,
+        'id' : _id,
+        'following' : count(following),
+        'followers' : count(followers)},
+          "other":*[_type == "user" && username != "jenn0.6n"] | order(username asc){...,
+        'id' : _id,
+        'following' : count(following),
+        'followers' : count(followers),}
+        }
+      `
+    );
+  }
   return client.fetch(
     `
-    { "me":*[_type == "user" && username == "jenn0.6n"][0]{...,
-      'id' : _id,
-      'following' : count(following),
-      'followers' : count(followers)},
-        "other":*[_type == "user" && username != "jenn0.6n"] | order(username asc){...,
+    *[_type == "user"] | order(username asc){...,
       'id' : _id,
       'following' : count(following),
       'followers' : count(followers),}
-      }
     `
   );
 }
