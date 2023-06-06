@@ -25,7 +25,7 @@ export default function RootLayout({
               <Header />
             </div>
           </header>
-          <main className="w-full min-h-full flex justify-center ">
+          <main className="w-full  flex justify-center pt-5">
             <SWRConfigContext>{children}</SWRConfigContext>
           </main>
         </AuthContext>
