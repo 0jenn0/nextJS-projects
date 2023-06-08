@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { authOptions } from "../../auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
-import { getPost } from "@/service/posts";
+import { getPostsOf } from "@/service/posts";
 
 type Context = {
   params: {
@@ -17,6 +17,6 @@ export async function GET(request: Request, context: Context) {
     return new Response("Authentication Error", { status: 401 });
   }
 
-  return getPost(context.params.id) //
+  return getPostsOf(context.params.id) //
     .then((data) => NextResponse.json(data));
 }

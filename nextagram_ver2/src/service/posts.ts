@@ -28,27 +28,7 @@ export async function getFollowingPostOf(username: string) {
     );
 }
 
-//2cb72bce-9d38-460f-a913-dce4677cbfbd
-
-export async function getPost(id: string) {
-  return client
-    .fetch(
-      `*[_type == "post" && _id == "${id}"][0]{
-      ...,
-      "username": author->username,
-      "userImage": author->image,
-      "image": photo,
-      "likes": likes[]->username,
-      comments[]{comment, "username": author->username, "image": author->image},
-      "id":_id,
-      "createdAt":_creatdAt
-    }`
-    )
-    .then((post) => ({ ...post, image: urlFor(post.image) }));
-}
-
-export async function getPostByMenu(menu: Menu, username: string) {
-  console.log("getPostbymnene", menu, username);
+export async function getPostsOf(username: string) {
   return client
     .fetch(
       `
@@ -63,7 +43,7 @@ export async function getPostByMenu(menu: Menu, username: string) {
 export async function getLikedPosts(username: string) {
   return client
     .fetch(
-      `*[_type == "post" && *[_type == "user" && username == "cuty.cat"][0]._id in likes[]._ref]
+      `*[_type == "post" && *[_type == "user" && username == "${username}"][0]._id in likes[]._ref]
      | order(_createdAt desc){${simplePostProjection}}`
     )
     .then((posts) =>
