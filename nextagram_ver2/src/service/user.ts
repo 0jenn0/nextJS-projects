@@ -1,4 +1,4 @@
-import { UserBySearch } from "@/model/user";
+import { SimpleUser, AuthUser, SearchUser } from "@/model/user";
 import { client } from "./sanity";
 
 type OAuthUser = {
@@ -64,7 +64,7 @@ export async function getUsers(username?: string) {
           followers: newData.me.followers || 0,
         });
 
-        newData.other = newData.other.map((user: UserBySearch) =>
+        newData.other = newData.other.map((user: SearchUser) =>
           Object.assign({}, user, {
             following: user.following || 0,
             followers: user.followers || 0,
@@ -85,7 +85,7 @@ export async function getUsers(username?: string) {
     `
     )
     .then((users) =>
-      users.map((user: UserBySearch) => ({
+      users.map((user: SearchUser) => ({
         ...user,
         following: user.following ?? 0,
         followers: user.followers ?? 0,
@@ -105,7 +105,7 @@ export async function getUsersBySearch(keyword: string) {
   `
     )
     .then((users) =>
-      users.map((user: UserBySearch) => ({
+      users.map((user: SearchUser) => ({
         ...user,
         following: user.following ?? 0,
         followers: user.followers ?? 0,
@@ -114,12 +114,33 @@ export async function getUsersBySearch(keyword: string) {
 }
 
 export async function getUserForProfile(username: string) {
-  return client.fetch(`
+  return client
+    .fetch(
+      `
   *[_type == "user" && username == "${username}"][0]{
     ...,
     "following": count(following),
     "followers": count(followers),
     "posts": count(*[_type == "post" && author->username == "${username}"])
   }
-  `);
+  `
+    )
+    .then((user) => ({
+      ...user,
+      following: user.following ?? 0,
+      followers: user.followers ?? 0,
+      posts: user.posts ?? 0,
+    }));
+}
+
+export async function isFollow(username: string, user: SimpleUser) {
+  console.log(username, user.username);
+  return client
+    .fetch(
+      `
+  *[_type == "user" && username=="${username}" && _id in *[_type=="user" && username=="${user.username}"].following[]._ref]
+  `
+    )
+    .then((data) => console.log("dataaaaaaaaaa", data));
+  // .then((data) => (data.length != 0 ? true : false));
 }

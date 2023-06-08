@@ -2,7 +2,7 @@
 
 import UserListCard from "@/components/UserListCard";
 import GridSpinner from "@/components/ui/GridSpinner";
-import { UserBySearch } from "@/model/user";
+import { SearchUser } from "@/model/user";
 import { useState } from "react";
 import useSWR from "swr";
 import useDebounce from "@/app/hooks/useDebounce";
@@ -53,14 +53,14 @@ export default function UserSearch() {
 
         {data &&
           data.other &&
-          data.other.map((user: UserBySearch) => (
+          data.other.map((user: SearchUser) => (
             <li key={user.username}>
               <UserListCard user={user} />
             </li>
           ))}
         {data &&
           !data.other &&
-          data.map((user: UserBySearch) => (
+          data.map((user: SearchUser) => (
             <li key={user.username}>
               <UserListCard user={user} />
             </li>

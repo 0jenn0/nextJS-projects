@@ -2,8 +2,8 @@
 
 import Avatar from "@/components/Avatar";
 import GridPosts from "@/components/GridPosts";
-import FollowButton from "@/components/ui/FollowButton";
-import { DetailUser, ProfileUser } from "@/model/user";
+import FollowButton from "@/components/FollowButton";
+import { ProfileUser } from "@/model/user";
 import { useState } from "react";
 import useSWR from "swr";
 
@@ -17,12 +17,12 @@ export type Menu = "POST" | "SAVED" | "LIKED";
 
 const menuArr: Menu[] = ["POST", "SAVED", "LIKED"];
 
-export default function page({ params }: Props) {
+export default function page({ params: { username } }: Props) {
   const {
     data: user,
     isLoading: loading,
     error,
-  } = useSWR<ProfileUser>(`/api/profile/${params.username}`);
+  } = useSWR<ProfileUser>(`/api/profile/${username}`);
 
   const [checked, setChecked] = useState<Menu>("POST");
 
@@ -36,7 +36,7 @@ export default function page({ params }: Props) {
           <div>
             <div className="flex gap-2">
               <p>{user.username}</p>
-              <FollowButton username={params.username} />
+              <FollowButton user={user} />
             </div>
             <span>{user.posts}</span> <span>posts </span>
             <span>{user.followers}</span> <span>followers </span>
