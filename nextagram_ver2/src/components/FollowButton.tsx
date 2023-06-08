@@ -2,6 +2,7 @@
 
 import { HomeUser, ProfileUser } from "@/model/user";
 import useSWR from "swr";
+import Button from "./Button";
 
 type Props = {
   user: ProfileUser;
@@ -18,10 +19,10 @@ export default function FollowButton({ user }: Props) {
   const buttonStyle = following ? "bg-red-400" : "bg-blue-400";
 
   return (
-    <button
-      className={`text-white px-2 py-[0.2rem] rounded-2xl ${buttonStyle}`}
-    >
-      {text}
-    </button>
+    <>
+      {showButton && (
+        <Button text={text} onclick={() => {}} red={text === "Unfollow"} />
+      )}
+    </>
   );
 }
