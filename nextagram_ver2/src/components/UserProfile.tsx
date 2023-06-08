@@ -14,21 +14,21 @@ export default function UserProfile({ user }: Props) {
     { title: "following", data: following },
   ];
   return (
-    <section className="flex gap-3">
-      <Avatar image={image} size="large" />
-      <div>
-        <div className="flex gap-2">
-          <p>{username}</p>
+    <section className="w-full flex gap-10 pb-8 pt-3 justify-center items-center">
+      <Avatar image={image} size="xlarge" highlight={true} />
+      <div className="flex flex-col gap-2">
+        <div className="flex gap-2 items-center">
+          <p className="font-semibold text-lg">{username}</p>
           <FollowButton user={user} />
         </div>
         <ul className="flex gap-2">
-          {info.map((item, index) => (
-            <li key={index}>
-              <span>{item.data}</span> {item.title}
+          {info.map(({ data, title }, index) => (
+            <li key={index} className="text-neutral-600">
+              <span className="font-semibold">{data}</span> {title}
             </li>
           ))}
         </ul>
-        <p>{name}</p>
+        <p className="text-lg">{name}</p>
       </div>
     </section>
   );
