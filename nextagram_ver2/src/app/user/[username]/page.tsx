@@ -6,6 +6,7 @@ import FollowButton from "@/components/FollowButton";
 import { ProfileUser } from "@/model/user";
 import { useState } from "react";
 import useSWR from "swr";
+import UserProfile from "@/components/UserProfile";
 
 type Props = {
   params: {
@@ -30,21 +31,7 @@ export default function page({ params: { username } }: Props) {
 
   return (
     <section className="w-full flex flex-col items-center">
-      {user && (
-        <section className="flex gap-3">
-          <Avatar image={user.image} size="large" />
-          <div>
-            <div className="flex gap-2">
-              <p>{user.username}</p>
-              <FollowButton user={user} />
-            </div>
-            <span>{user.posts}</span> <span>posts </span>
-            <span>{user.followers}</span> <span>followers </span>
-            <span>{user.following}</span> <span>following </span>
-            <p>{user.name}</p>
-          </div>
-        </section>
-      )}
+      {user && <UserProfile user={user} />}
 
       <menu className="flex w-full border-t border-neutral-200 p-0 justify-center">
         <ul className="w-1/2 flex justify-between">
