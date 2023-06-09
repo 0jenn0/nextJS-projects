@@ -11,27 +11,29 @@ type Props = {
 export type Tab = "POST" | "SAVED" | "LIKED";
 
 export default function UserPosts({ user }: Props) {
-  const menuArr: Tab[] = ["POST", "SAVED", "LIKED"];
+  const tabArr: Tab[] = ["POST", "SAVED", "LIKED"];
   const [tab, setTab] = useState<Tab>("POST");
 
   return (
     <>
-      <menu className="flex w-full border-t border-neutral-200 p-0 justify-center">
+      <menu className="flex w-full border-t border-neutral-200 p-0 justify-center ">
         <ul className="w-1/2 flex justify-between">
-          {menuArr.map((menu) => (
+          {tabArr.map((item) => (
             <button
-              key={menu}
-              onClick={() => setTab(menu)}
+              key={item}
+              onClick={() => setTab(item)}
               className={
-                tab === menu ? "border-t border-neutral-400 p-3" : "p-3"
+                tab === item
+                  ? "border-t border-neutral-400 p-3 font-semibold text-black"
+                  : "p-3 text-neutral-500"
               }
             >
-              {menu}
+              {item}
             </button>
           ))}
         </ul>
       </menu>
-      {user && <GridPosts tab={tab} username={user.username} />}
+      <GridPosts tab={tab} username={user.username} />
     </>
   );
 }

@@ -1,4 +1,3 @@
-import { Menu } from "./../app/user/[username]/page";
 import { SimplePost } from "@/model/post";
 import { client, urlFor } from "./sanity";
 

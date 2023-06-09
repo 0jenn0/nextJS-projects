@@ -18,11 +18,11 @@ export default function GridPosts({ tab, username }: Props) {
   } = useSWR<SimplePost[]>(`/api/users/${username}/${tab}`);
 
   return (
-    <ul className="grid grid-cols-3 gap-3 justify-center items-center">
+    <ul className="w-2/3 grid grid-cols-3 gap-3 justify-center items-center">
       {posts &&
-        posts.map((post) => (
+        posts.map((post, index) => (
           <li key={post.id}>
-            <FeedCard post={post} />
+            <FeedCard post={post} priority={index < 6} />
           </li>
         ))}
     </ul>
