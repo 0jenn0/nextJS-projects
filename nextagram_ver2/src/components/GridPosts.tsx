@@ -1,21 +1,21 @@
 "use client";
 
 import useSWR from "swr";
-import { Menu } from "@/app/user/[username]/page";
-import { FullPost, SimplePost } from "@/model/post";
+import { Tab } from "./UserPosts";
+import { SimplePost } from "@/model/post";
 import FeedCard from "./FeedCard";
 
 type Props = {
-  checked: Menu;
+  tab: Tab;
   username: string;
 };
 
-export default function GridPosts({ checked, username }: Props) {
+export default function GridPosts({ tab, username }: Props) {
   const {
     data: posts,
     isLoading,
     error,
-  } = useSWR<SimplePost[]>(`/api/profilePost/${username}/${checked}`);
+  } = useSWR<SimplePost[]>(`/api/users/${username}/${tab}`);
 
   return (
     <ul className="grid grid-cols-3 gap-3 justify-center items-center">

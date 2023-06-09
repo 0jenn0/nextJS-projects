@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getLikedPosts, getPostsOf, getSavedPosts } from "@/service/posts";
-import { Menu } from "@/app/user/[username]/page";
+import { Tab } from "@/components/UserPosts";
 
 type Context = {
   params: {
