@@ -2,20 +2,38 @@ import { SimplePost } from "@/model/post";
 import BookmarkIcon from "./ui/icons/BookmarkIcon";
 import LikesIcon from "./ui/icons/LikesIcon";
 import { parseDate } from "@/util/parseDate";
+import { useState } from "react";
+import ToggleButton from "./ui/ToggleButton";
+import LikesFillIcon from "./ui/icons/LikesFillIcon";
+import BookmarkFillIcon from "./ui/icons/BookmarkFillIcon";
 
 type Props = {
   post: SimplePost;
 };
+
+const handleClick = () => {
+  return;
+};
+
 export default function ActionBar({ post }: Props) {
+  const [liked, setLiked] = useState(false);
+  const [bookmarked, setBookmarked] = useState(false);
+
   return (
     <>
       <div className="p-3 flex justify-between text-xl">
-        <button>
-          <LikesIcon />
-        </button>
-        <button>
-          <BookmarkIcon />
-        </button>
+        <ToggleButton
+          toggled={liked}
+          onToggle={setLiked}
+          onIcon={<LikesFillIcon />}
+          offIcon={<LikesIcon />}
+        />
+        <ToggleButton
+          toggled={bookmarked}
+          onToggle={setBookmarked}
+          onIcon={<BookmarkFillIcon />}
+          offIcon={<BookmarkIcon />}
+        />
       </div>
       <div>
         <p className="font-semibold text-sm px-3">

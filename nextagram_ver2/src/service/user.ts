@@ -134,7 +134,6 @@ export async function getUserForProfile(username: string) {
 }
 
 export async function isFollow(username: string, user: SimpleUser) {
-  console.log(username, user.username);
   return client
     .fetch(
       `
