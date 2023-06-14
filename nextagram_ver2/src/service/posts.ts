@@ -23,7 +23,11 @@ export async function getFollowingPostOf(username: string) {
      | order(_createdAt desc){${simplePostProjection}}`
     )
     .then((posts) =>
-      posts.map((post: SimplePost) => ({ ...post, image: urlFor(post.image) }))
+      posts.map((post: SimplePost) => ({
+        ...post,
+        image: urlFor(post.image),
+        likes: post.likes ?? [],
+      }))
     );
 }
 
@@ -35,7 +39,11 @@ export async function getPostsOf(username: string) {
   `
     )
     .then((posts) =>
-      posts.map((post: SimplePost) => ({ ...post, image: urlFor(post.image) }))
+      posts.map((post: SimplePost) => ({
+        ...post,
+        image: urlFor(post.image),
+        likes: post.likes ?? [],
+      }))
     );
 }
 
@@ -46,7 +54,11 @@ export async function getLikedPosts(username: string) {
      | order(_createdAt desc){${simplePostProjection}}`
     )
     .then((posts) =>
-      posts.map((post: SimplePost) => ({ ...post, image: urlFor(post.image) }))
+      posts.map((post: SimplePost) => ({
+        ...post,
+        image: urlFor(post.image),
+        likes: post.likes ?? [],
+      }))
     );
 }
 
@@ -59,7 +71,11 @@ export async function getSavedPosts(username: string) {
   `
     )
     .then((posts) =>
-      posts.map((post: SimplePost) => ({ ...post, image: urlFor(post.image) }))
+      posts.map((post: SimplePost) => ({
+        ...post,
+        image: urlFor(post.image),
+        likes: post.likes ?? [],
+      }))
     );
 }
 

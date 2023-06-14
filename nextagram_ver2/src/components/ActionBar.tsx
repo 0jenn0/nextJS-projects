@@ -6,25 +6,34 @@ import { useState } from "react";
 import ToggleButton from "./ui/ToggleButton";
 import LikesFillIcon from "./ui/icons/LikesFillIcon";
 import BookmarkFillIcon from "./ui/icons/BookmarkFillIcon";
+import { useSession } from "next-auth/react";
 
 type Props = {
   post: SimplePost;
 };
 
-const handleClick = () => {
-  return;
-};
-
 export default function ActionBar({ post }: Props) {
-  const [liked, setLiked] = useState(false);
+  const { data: session } = useSession();
+  const id = post.id;
+  const user = session?.user;
+  const [liked, setLiked] = useState(
+    user ? post.likes.includes(user.username) : false
+  );
   const [bookmarked, setBookmarked] = useState(false);
+
+  const handleClick = (like: boolean) => {
+    fetch("api/likes", {
+      method: "PUT",
+      body: JSON.stringify({ id, like }),
+    }).then(() => setLiked(like));
+  };
 
   return (
     <>
       <div className="p-3 flex justify-between text-xl">
         <ToggleButton
           toggled={liked}
-          onToggle={setLiked}
+          onToggle={handleClick}
           onIcon={<LikesFillIcon />}
           offIcon={<LikesIcon />}
         />
