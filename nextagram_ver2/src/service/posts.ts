@@ -13,8 +13,6 @@ const simplePostProjection = `
 'createdAt':_createdAt
 `;
 
-// post의 likes 안에 username인 user가 있어야됨.
-
 export async function getFollowingPostOf(username: string) {
   return client
     .fetch(

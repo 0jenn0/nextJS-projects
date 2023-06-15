@@ -7,6 +7,7 @@ import ToggleButton from "./ui/ToggleButton";
 import LikesFillIcon from "./ui/icons/LikesFillIcon";
 import BookmarkFillIcon from "./ui/icons/BookmarkFillIcon";
 import { useSession } from "next-auth/react";
+import { useSWRConfig } from "swr";
 
 type Props = {
   post: SimplePost;
@@ -16,16 +17,18 @@ export default function ActionBar({ post }: Props) {
   const { data: session } = useSession();
   const id = post.id;
   const user = session?.user;
-  const [liked, setLiked] = useState(
-    user ? post.likes.includes(user.username) : false
-  );
+  // const [liked, setLiked] = useState(
+  //   user ? post.likes.includes(user.username) : false
+  // );
+  const liked = user ? post.likes.includes(user.username) : false;
   const [bookmarked, setBookmarked] = useState(false);
+  const { mutate } = useSWRConfig();
 
   const handleClick = (like: boolean) => {
     fetch("api/likes", {
       method: "PUT",
       body: JSON.stringify({ id, like }),
-    }).then(() => setLiked(like));
+    }).then(() => mutate("/api/posts"));
   };
 
   return (
